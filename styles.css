@@ -1,0 +1,431 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+/* Cabeçalho estilo app */
+.header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite quebra em telas menores */
+}
+
+.nav-links, .auth-links {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav-links, .auth-links {
+    flex-direction: column; /* Empilha os links em telas menores */
+    align-items: flex-start;
+  }
+}
+
+/* Destaque */
+.featured {
+  padding: 20px;
+  text-align: center;
+}
+
+.featured iframe {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.featured h1 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.featured p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.featured .arrow-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Postagens do Blog */
+.blog-posts {
+  padding: 20px;
+}
+
+.blog-posts h2 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Exemplo de CSS responsivo */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo */
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+}
+
+.post {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+.post iframe {
+  width: 100%; /* Largura total do contêiner */
+  height: auto;
+  aspect-ratio: 9 / 16; /* Proporção vertical (9:16) */
+  border-radius: 10px;
+}
+
+.post h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.post p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.curtir, .compartilhar {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.curtir:hover, .compartilhar:hover {
+  background-color: #0056b3; /* Cor mais escura no hover */
+  transform: scale(1.05); /* Leve aumento no tamanho */
+}
+
+.curtir:focus, .compartilhar:focus {
+  outline: 2px solid #0056b3; /* Destaque no foco */
+}
+
+/* Botão de carregar mais */
+.load-more {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Rodapé */
+.footer {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.footer button {
+  background-color: #fff;
+  color: #007bff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column; /* Empilha os links no rodapé */
+  }
+}
+
+/* Modal */
+.modal {
+  display: none; /* Oculto por padrão */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo semitransparente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 20%; /* O modal ocupa 90% da largura da tela */
+  max-width: 600px; /* Limite máximo de largura */
+  height: auto; /* Ajusta a altura automaticamente */
+  max-height: 100vh; /* Limite máximo de altura */
+  overflow-y: auto; /* Permite rolagem vertical se necessário */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* O modal ocupa 95% da largura em telas menores */
+    max-width: 320px; /* Limita a largura máxima */
+    padding: 15px; /* Reduz o padding interno */
+  }
+
+  .modal-body {
+    gap: 15px; /* Reduz o espaçamento entre os elementos */
+  }
+
+  .modal .video-container {
+    width: 100%; /* O vídeo ocupa toda a largura disponível */
+    padding-top: 177.78%; /* Mantém a proporção 9:16 */
+  }
+
+  .modal .ad-container {
+    width: 100%; /* O contêiner de publicidade ocupa toda a largura */
+  }
+
+  .modal .ad-container img {
+    width: 100%; /* A imagem ocupa toda a largura */
+    height: auto; /* Ajusta a altura automaticamente */
+  }
+}
+
+.modal .close {
+  position: absolute; /* Posiciona o botão dentro do modal */
+  top: 10px; /* Distância do topo */
+  right: 10px; /* Distância da borda direita */
+  font-size: 1.5rem; /* Tamanho do texto */
+  color: hsl(0, 91%, 50%); /* Cor do botão */
+  cursor: pointer; /* Mostra o cursor de clique */
+  z-index: 1001; /* Garante que o botão fique acima do conteúdo */
+}
+
+/* Estilo para o botão "Fechar" dentro do modal */
+button.fechar {
+  background-color: #ff4d4d; /* Cor de fundo vermelha */
+  color: #fff; /* Cor do texto branca */
+  border: none; /* Remove a borda padrão */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 1rem; /* Tamanho da fonte */
+  cursor: pointer; /* Mostra o cursor de clique */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+}
+
+/* Efeito de hover no botão "Fechar" */
+button.fechar:hover {
+  background-color: #e60000; /* Cor mais escura no hover */
+  transform: scale(1.05); /* Leve aumento no tamanho */
+}
+
+/* Efeito de foco no botão "Fechar" */
+button.fechar:focus {
+  outline: 2px solid #e60000; /* Destaque no foco */
+  outline-offset: 2px; /* Espaçamento do destaque */
+}
+
+/* Estilo para o corpo do modal */
+.modal-body {
+  display: flex;
+  flex-direction: column; /* Empilha os elementos na vertical */
+  gap: 20px; /* Espaçamento entre o vídeo e a publicidade */
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* O corpo do modal ocupa toda a largura */
+}
+
+/* Estilo para o contêiner de publicidade */
+.ad-container {
+  width: 100%;
+  max-width: 400px; /* Mesmo tamanho máximo do vídeo */
+  text-align: center;
+}
+
+.ad-container img {
+  width: 100%;
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}
+
+.ad-container p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Estilo para tornar o iframe responsivo */
+iframe {
+  width: 100%;
+  height: 600px; /* Altura ajustada para vídeos verticais */
+  border: none;
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr; /* Uma coluna no celular */
+  }
+
+  .video-container {
+    padding-top: 56.25%; /* Mantém a proporção 16:9 */
+  }
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .video-container {
+    padding-top: 200%; /* Ajusta a proporção para telas menores, se necessário */
+  }
+}
+
+@media (min-width: 1024px) {
+  .post {
+    flex: 1 1 calc(33.33% - 15px);
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr); /* Três colunas no desktop */
+  }
+}
+
+/* Container de vídeo */
+.video-container {
+  position: relative;
+  width: 100%; /* O vídeo ocupa toda a largura do contêiner */
+  padding-top: 177.78%; /* Proporção 9:16 (altura = largura * 16 / 9) */
+  overflow: hidden;
+  background-color: #000; /* Fundo preto para evitar "casar" com o fundo */
+  border-radius: 10px; /* Bordas arredondadas */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* O iframe ocupa toda a largura do contêiner */
+  height: 100%; /* O iframe ocupa toda a altura do contêiner */
+  border: none;
+}
+
+/* Estilo para o vídeo dentro do modal */
+.modal .video-container {
+  position: relative;
+  width: 100%; /* O vídeo ocupa toda a largura do modal */
+  padding-top: 177.78%; /* Proporção 9:16 (altura = largura * 16 / 9) */
+  overflow: hidden;
+  background-color: #000; /* Fundo preto para evitar "casar" com o fundo */
+  border-radius: 10px; /* Bordas arredondadas */
+}
+
+.modal .video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* O iframe ocupa toda a largura do contêiner */
+  height: 100%; /* O iframe ocupa toda a altura do contêiner */
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .modal .video-container {
+    width: 100%; /* O vídeo ocupa toda a largura disponível */
+    padding-top: 177.78%; /* Mantém a proporção 9:16 */
+  }
+}
+
+.modal .ad-container {
+  width: 100%; /* O contêiner ocupa toda a largura disponível */
+  max-width: 400px; /* Limite máximo de largura */
+  text-align: center;
+}
+
+.modal .ad-container img {
+  width: 100%; /* A imagem ocupa toda a largura do contêiner */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}

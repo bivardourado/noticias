@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog com YouTube Players</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">Untitled UI</div>
+        <ul class="nav-links">
+          <li><a href="#">Início</a></li>
+        </ul>
+        <div class="auth-links">
+          <a href="#" class="login">Entrar</a>
+          <a href="#" class="signup">Cadastrar</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Destaque -->
+  <section class="featured">
+    <div class="container">
+      <div class="featured-content">
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/VIDEO_ID1" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <h1>Entrando no Design de Produto: Dicas do Fundador Untitled, Frankie</h1>
+        <p>Vamos esclarecer uma coisa: você não precisa de um diploma sofisticado para entrar no design de produto...</p>
+        <a href="#" class="arrow-link">Leia mais</a>
+        <div class="actions">
+          <button class="curtir" data-id="1">Curtir</button>
+          <span class="curtidas"><span class="count">0</span> curtidas</span>
+          <button class="compartilhar" data-id="1">Compartilhar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Postagens do Blog -->
+  <section class="blog-posts">
+    <div class="container">
+      <h2>Postagens Recentes no Blog</h2>
+      <div class="posts-grid">
+        <!-- Post 1 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/rIVP8pndzMo" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Migrando para o Linear 101</h3>
+          <p>Linear ajuda a simplificar projetos de software...</p>
+          <div class="actions">
+            <button class="curtir" data-id="rIVP8pndzMo">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="rIVP8pndzMo">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 2 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID2" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Explorando o GraphQL</h3>
+          <p>GraphQL está mudando a forma como consumimos APIs...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID2">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID2">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 3 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID3" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Introdução ao TypeScript</h3>
+          <p>Descubra como o TypeScript pode melhorar seu código JavaScript...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID3">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID3">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 4 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID4" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Automatizando Tarefas com Python</h3>
+          <p>Aprenda a usar Python para automatizar tarefas repetitivas...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID4">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID4">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 5 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID5" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Design Responsivo na Web</h3>
+          <p>Como criar layouts que se adaptam a qualquer dispositivo...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID5">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID5">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 6 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID6" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Segurança em Aplicações Web</h3>
+          <p>Proteja seus aplicativos contra as ameaças mais comuns...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID6">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID6">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 7 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID7" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Introdução ao Docker</h3>
+          <p>Entenda como o Docker pode simplificar o desenvolvimento...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID7">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID7">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 8 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID8" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Melhores Práticas de Git</h3>
+          <p>Aprenda a usar Git de forma eficiente em seus projetos...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID8">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID8">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 9 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID9" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Introdução ao Kubernetes</h3>
+          <p>Descubra como o Kubernetes pode gerenciar seus contêineres...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID9">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID9">Compartilhar</button>
+          </div>
+        </div>
+        <!-- Post 10 -->
+        <div class="post">
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/VIDEO_ID10" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <h3>Explorando o GraphQL</h3>
+          <p>GraphQL está mudando a forma como consumimos APIs...</p>
+          <div class="actions">
+            <button class="curtir" data-id="VIDEO_ID10">Curtir</button>
+            <span class="curtidas"><span class="count">0</span> curtidas</span>
+            <button class="compartilhar" data-id="VIDEO_ID10">Compartilhar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Vídeo -->
+  <div id="video-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span> <!-- Botão de fechar no canto superior -->
+      <div class="modal-body">
+        <!-- Contêiner do vídeo -->
+        <div class="video-container">
+          <iframe 
+            id="video-iframe" 
+            src="" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <!-- Contêiner de publicidade -->
+        <div class="ad-container">
+          <p>Publicidade</p>
+          <img src="https://via.placeholder.com/400x225" alt="Publicidade" />
+        </div>
+      </div>
+      <div class="actions">
+        <button id="modal-curtir" class="curtir">Curtir</button>
+        <span class="curtidas"><span id="modal-curtidas" class="count">0</span> curtidas</span>
+        <button id="modal-fechar" class="fechar">Fechar</button> <!-- Botão Fechar -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="cta">
+        <h3>Comece algo incrível</h3>
+        <p>Junte-se a mais de 4.000 startups já crescendo com a Untitled.</p>
+        <button>Fale conosco</button>
+        <button>Comece agora</button>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#">Visão Geral</a></li>
+            <li><a href="#">Recursos</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>&copy; 2025 Untitled UI. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
