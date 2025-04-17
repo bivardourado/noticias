@@ -419,7 +419,7 @@ body {
   position: absolute; /* Posiciona o botão dentro do modal */
   top: 10px; /* Distância do topo */
   right: 10px; /* Distância da borda direita */
-  font-size: 1rem; /* Tamanho do texto */
+  font-size: 0rem; /* Tamanho do texto */
   color: hsl(0, 91%, 50%); /* Cor do botão */
   cursor: pointer; /* Mostra o cursor de clique */
   z-index: 1001; /* Garante que o botão fique acima do conteúdo */
@@ -432,7 +432,7 @@ button.fechar {
   border: none; /* Remove a borda padrão */
   padding: 10px 20px; /* Espaçamento interno */
   border-radius: 5px; /* Bordas arredondadas */
-  font-size: 1rem; /* Tamanho da fonte */
+  font-size: 0rem; /* Tamanho da fonte */
   cursor: pointer; /* Mostra o cursor de clique */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
 }
