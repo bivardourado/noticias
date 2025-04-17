@@ -596,12 +596,12 @@ iframe {
 .modal .video-overlay {
   position: absolute;
   bottom: 150px; /* Posiciona o texto no rodapé do vídeo */
-  left: 30px; /* Alinha o texto à esquerda */
- right: 30px; /* Alinha o texto à direita */
+  left: 40px; /* Alinha o texto à esquerda */
+ right: 40px; /* Alinha o texto à direita */
   color: #fff; /* Texto branco */
-  font-size: 0.8rem; /* Tamanho do texto padrão */
+  font-size: 0.9rem; /* Tamanho do texto padrão */
  
-  padding: 10px 5px; /* Espaçamento interno */
+  padding: 10px 10px; /* Espaçamento interno */
   border-radius: 20px; /* Bordas arredondadas */
   margin: 0; /* Remove margens */
   display: inlfine-block; /* Faz o fundo se ajustar ao tamanho do texto */
