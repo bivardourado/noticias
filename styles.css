@@ -265,7 +265,7 @@ body {
   top: 50%; /* Centraliza verticalmente */
   left: 50%; /* Centraliza horizontalmente */
   transform: translate(-50%, -50%); /* Ajusta o ponto de referência para o centro */
-  background-color: rgba(0, 0, 0, 0.062); /* Fundo semitransparente */
+  background-color: rgba(20, 19, 121, 0.062); /* Fundo semitransparente */
   z-index: 1000;
   width: 90%; /* O modal ocupa 90% da largura da tela */
   max-width: 300px; /* Limite máximo de largura */
