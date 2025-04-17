@@ -1,99 +1,292 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("video-modal");
-  const iframe = document.getElementById("video-iframe");
-  const closeModal = document.querySelector(".modal .close");
-  const modalCurtidas = document.getElementById("modal-curtidas");
-  const modalCurtirButton = document.getElementById("modal-curtir");
-  const modalFecharButton = document.getElementById("modal-fechar");
+/**
+ * Blog com YouTube Players - Interações
+ * Gerencia interações de usuário incluindo curtidas com emojis, compartilhamento e exibição de modal
+ */
 
-  // Função para abrir o modal
-  function openModal(videoId) {
-    iframe.src = `https://www.youtube.com/embed/${videoId}`;
-    modal.style.display = "flex";
-    modalCurtidas.textContent = "0"; // Reseta as curtidas
+// Armazena o estado da aplicação
+const appState = {
+  currentPost: null,  // Post atualmente aberto no modal
+  likeData: {}        // Armazena dados de curtidas por post (usando índice ou ID)
+};
 
-    // Remove eventos duplicados antes de adicionar novamente
-    modalCurtirButton.replaceWith(modalCurtirButton.cloneNode(true));
-    const newModalCurtirButton = document.getElementById("modal-curtir");
+// Cache de elementos DOM frequentemente usados
+const elements = {
+  modal: document.getElementById('video-modal'),
+  modalIframe: document.getElementById('video-iframe'),
+  modalCurtidas: document.getElementById('modal-curtidas'),
+  modalCompartilhar: document.getElementById('modal-compartilhar'),
+  closeButton: document.querySelector('.close'),
+  posts: document.querySelectorAll('.post')
+};
 
-    // Adiciona evento ao botão "Curtir" no modal
-    newModalCurtirButton.addEventListener("click", () => {
-      let curtidas = parseInt(modalCurtidas.textContent, 10) || 0;
-      curtidas++;
-      modalCurtidas.textContent = curtidas;
-    });
+/**
+ * Inicializa a aplicação
+ */
+function initApp() {
+  // Garante que todos os posts tenham um identificador único
+  ensurePostIdentifiers();
+  initPostsInteractions();
+  initModalInteractions();
+  initStorageData();
+  checkUrlForSharedPost();
+}
+
+/**
+ * Verifica a URL por parâmetros de postagem compartilhada e abre o modal apropriado
+ */
+function checkUrlForSharedPost() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const sharedPostId = urlParams.get('post');
+  
+  if (sharedPostId) {
+    // Encontra o post com o ID correspondente
+    const targetPost = Array.from(elements.posts).find(post => 
+      post.getAttribute('data-id') === sharedPostId
+    );
+    
+    if (targetPost) {
+      // Pequeno atraso para garantir que a página carregue completamente
+      setTimeout(() => {
+        openModal(targetPost);
+      }, 300);
+    }
   }
+}
 
-  // Função para fechar o modal
-  function closeModalFunction() {
-    modal.style.display = "none";
-    iframe.src = ""; // Limpa o iframe
+/**
+ * Garante que todos os posts tenham um identificador único
+ * Isso resolve o problema de posts sem data-id válido
+ */
+function ensurePostIdentifiers() {
+  elements.posts.forEach((post, index) => {
+    const postId = post.getAttribute('data-id');
+    if (!postId || postId.includes('VIDEO_ID')) {
+      // Se não tiver ID ou for um placeholder, atribui um ID baseado no índice
+      post.setAttribute('data-id', `post-${index + 1}`);
+      
+      // Também atualiza o botão de compartilhar, se existir
+      const shareButton = post.querySelector('.compartilhar-whatsapp');
+      if (shareButton) {
+        shareButton.setAttribute('data-id', `post-${index + 1}`);
+      }
+    }
+  });
+}
+
+/**
+ * Inicializa os dados de armazenamento
+ */
+function initStorageData() {
+  try {
+    // Verifica se há dados salvos no localStorage
+    const savedData = localStorage.getItem('blogLikeData');
+    if (savedData) {
+      appState.likeData = JSON.parse(savedData);
+      updateAllLikeCounts();
+    }
+  } catch (error) {
+    console.error('Erro ao carregar dados salvos:', error);
   }
+}
 
-  // Evento para fechar o modal ao clicar no botão "Fechar" no canto superior
-  closeModal.addEventListener("click", closeModalFunction);
-
-  // Evento para fechar o modal ao clicar no botão "Fechar" dentro do modal
-  modalFecharButton.addEventListener("click", closeModalFunction);
-
-  // Adiciona evento ao botão "Curtir" no modal
-  modalCurtirButton.addEventListener("click", () => {
-    let curtidas = parseInt(modalCurtidas.textContent, 10) || 0; // Garante que o valor inicial seja 0
-    curtidas++; // Incrementa o contador
-    modalCurtidas.textContent = curtidas; // Atualiza o texto do contador
+/**
+ * Atualiza a contagem de curtidas em todos os posts baseado nos dados armazenados
+ */
+function updateAllLikeCounts() {
+  elements.posts.forEach(post => {
+    const postId = post.getAttribute('data-id');
+    if (postId && appState.likeData[postId]) {
+      const countElement = post.querySelector('.count');
+      if (countElement) {
+        countElement.textContent = appState.likeData[postId];
+      }
+    }
   });
+}
 
-  // Adiciona evento aos botões de curtir na página principal
-  document.querySelectorAll(".curtir").forEach(button => {
-    button.addEventListener("click", event => {
-      const countSpan = button.nextElementSibling.querySelector(".count"); // Seleciona o contador de curtidas
-      let curtidas = parseInt(countSpan.textContent, 10);
-      curtidas++;
-      countSpan.textContent = curtidas; // Atualiza o contador de curtidas
-    });
-  });
+/**
+ * Salva os dados de curtidas no localStorage
+ */
+function saveLikeData() {
+  try {
+    localStorage.setItem('blogLikeData', JSON.stringify(appState.likeData));
+  } catch (error) {
+    console.error('Erro ao salvar dados:', error);
+  }
+}
 
-  // Adiciona evento aos botões de compartilhar na página principal
-  document.querySelectorAll(".compartilhar").forEach(button => {
-    button.addEventListener("click", event => {
-      const videoId = event.target.dataset.id; // Obtém o ID do vídeo do botão
-      const currentUrl = window.location.href.split("?")[0];
-      const shareUrl = `${currentUrl}?video=${videoId}`;
-
-      // Copia o link para a área de transferência
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        alert("O link do vídeo foi copiado para a área de transferência!");
-      }).catch(err => {
-        console.error("Erro ao copiar o link: ", err);
+/**
+ * Inicializa as interações para posts
+ */
+function initPostsInteractions() {
+  elements.posts.forEach(post => {
+    // Adiciona evento para abrir o modal ao clicar no vídeo
+    const videoContainer = post.querySelector('.video-container');
+    if (videoContainer) {
+      videoContainer.addEventListener('click', () => openModal(post));
+    }
+    
+    // Adiciona eventos para os emojis nos posts
+    const emojis = post.querySelectorAll('.emoji');
+    emojis.forEach(emoji => {
+      emoji.addEventListener('click', event => {
+        event.stopPropagation(); // Previne que o evento de clique propague para o post
+        incrementLikeCount(post);
       });
     });
+    
+    // Adiciona evento para o botão de compartilhar
+    const shareButton = post.querySelector('.compartilhar-whatsapp');
+    if (shareButton) {
+      shareButton.addEventListener('click', event => {
+        event.stopPropagation();
+        const postId = post.getAttribute('data-id'); // Usar o ID do post
+        if (postId) {
+          // Compartilha o link para a página com o modal do post
+          sharePostModal(postId);
+        }
+      });
+    }
   });
+}
 
-  // Adiciona evento aos botões de compartilhar para WhatsApp
-  const shareButtons = document.querySelectorAll(".compartilhar");
-
-  shareButtons.forEach(button => {
-    button.addEventListener("click", event => {
-      const videoId = event.target.dataset.id; // Obtém o ID do vídeo do botão
-      const currentUrl = window.location.href.split("?")[0]; // URL base da página
-      const shareUrl = `${currentUrl}?video=${videoId}`; // Gera o link do vídeo
-
-      // Texto para compartilhar no WhatsApp
-      const message = `Confira este vídeo incrível: ${shareUrl}`;
-      const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-
-      // Abre o link no WhatsApp
-      window.open(whatsappLink, "_blank");
+/**
+ * Inicializa as interações do modal
+ */
+function initModalInteractions() {
+  // Adiciona evento para fechar o modal
+  elements.closeButton.addEventListener('click', closeModal);
+  
+  // Fecha o modal ao clicar fora do conteúdo
+  window.addEventListener('click', event => {
+    if (event.target === elements.modal) {
+      closeModal();
+    }
+  });
+  
+  // Adiciona eventos para os emojis no modal
+  const modalEmojis = elements.modal.querySelectorAll('.emoji');
+  modalEmojis.forEach(emoji => {
+    emoji.addEventListener('click', () => {
+      // Ao invés de incrementar contador no modal, incrementa diretamente no post
+      if (appState.currentPost) {
+        incrementLikeCount(appState.currentPost);
+        // Fecha o modal automaticamente após registrar o like
+        closeModal();
+      }
     });
   });
+  
+  // Adiciona evento ao botão de compartilhar do modal
+  elements.modalCompartilhar.addEventListener('click', () => {
+    const postId = appState.currentPost ? appState.currentPost.getAttribute('data-id') : null;
+    if (postId) {
+      // Compartilha o link para a página com o modal do post
+      sharePostModal(postId);
+    }
+  });
+}
 
-  // Verifica se há um parâmetro de vídeo na URL ao carregar a página
-  const urlParams = new URLSearchParams(window.location.search);
-  const videoIdFromUrl = urlParams.get("video");
-  if (videoIdFromUrl) {
-    openModal(videoIdFromUrl); // Abre o modal automaticamente com o vídeo correspondente
+/**
+ * Incrementa a contagem de curtidas em um post
+ * @param {HTMLElement} post - O elemento do post
+ */
+function incrementLikeCount(post) {
+  if (!post) return;
+  
+  const postId = post.getAttribute('data-id');
+  const countElement = post.querySelector('.count');
+  
+  if (postId && countElement) {
+    const currentCount = parseInt(countElement.textContent) || 0;
+    const newCount = currentCount + 1;
+    
+    // Atualiza o elemento visual
+    countElement.textContent = newCount;
+    
+    // Armazena o novo valor
+    appState.likeData[postId] = newCount;
+    saveLikeData();
   }
-});
+}
 
+/**
+ * Abre o modal com o post selecionado
+ * @param {HTMLElement} post - O elemento do post
+ */
+function openModal(post) {
+  if (!post) return;
+  
+  appState.currentPost = post;
+  const postId = post.getAttribute('data-id');
+  
+  if (postId) {
+    // Decide qual URL de vídeo usar
+    let videoSrc;
+    if (postId === 'rIVP8pndzMo') {
+      // Usa o ID real do YouTube para o primeiro post
+      videoSrc = `https://www.youtube.com/embed/${postId}`;
+    } else if (postId.startsWith('post-')) {
+      // Para os outros posts (com IDs gerados), usa um vídeo placeholder ou padrão
+      videoSrc = 'https://www.youtube.com/embed/dQw4w9WgXcQ'; // Vídeo padrão como exemplo
+    } else {
+      // Caso o post tenha um ID de vídeo específico
+      videoSrc = `https://www.youtube.com/embed/${postId}`;
+    }
+    
+    // Define o iframe para o vídeo correto
+    elements.modalIframe.src = videoSrc;
+    
+    // Copia a contagem de curtidas do post para o modal
+    const countValue = appState.likeData[postId] || 0;
+    elements.modalCurtidas.textContent = countValue;
+    
+    // Atualiza o botão de compartilhar do modal
+    elements.modalCompartilhar.setAttribute('data-id', postId);
+    
+    // Mostra o modal
+    elements.modal.style.display = 'flex';
+  }
+}
 
+/**
+ * Fecha o modal
+ */
+function closeModal() {
+  // Limpa o iframe para parar o vídeo
+  elements.modalIframe.src = '';
+  
+  // Esconde o modal
+  elements.modal.style.display = 'none';
+  
+  // Limpa a referência ao post atual
+  appState.currentPost = null;
+}
 
+/**
+ * Compartilha o link para a página atual com parâmetro para abrir o modal do post específico
+ * @param {string} postId - ID do post a ser compartilhado
+ */
+function sharePostModal(postId) {
+  if (!postId) return;
+  
+  try {
+    // Cria URL para a página atual com o parâmetro post
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('post', postId);
+    
+    // Limpa âncoras (#) se houver
+    const cleanUrl = currentUrl.toString().split('#')[0];
+    
+    // Compartilha via WhatsApp
+    const message = "Confira este vídeo incrível!";
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + ' ' + cleanUrl)}`;
+    window.open(whatsappUrl, '_blank');
+  } catch (error) {
+    console.error('Erro ao compartilhar:', error);
+    alert('Não foi possível compartilhar o post. Por favor, tente novamente.');
+  }
+}
+
+// Inicializa o aplicativo quando o DOM estiver completamente carregado
+document.addEventListener('DOMContentLoaded', initApp);
