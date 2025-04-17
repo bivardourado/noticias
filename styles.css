@@ -273,7 +273,7 @@ body {
   max-height: 90vh; /* Limite máximo de altura da tela */
   overflow: hidden; /* Remove barras de rolagem */
   border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.075); /* Sombra para destaque */
   display: flex;
   flex-direction: column; /* Empilha os elementos verticalmente */
   justify-content: space-between; /* Garante espaçamento entre os elementos */
