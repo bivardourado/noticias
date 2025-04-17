@@ -1,8 +1,3 @@
-/**
- * Blog com YouTube Players - Interações
- * Gerencia interações de usuário incluindo curtidas com emojis, compartilhamento e exibição de modal
- */
-
 // Armazena o estado da aplicação
 const appState = {
   currentPost: null,  // Post atualmente aberto no modal
@@ -241,6 +236,13 @@ function openModal(post) {
     const countValue = appState.likeData[postId] || 0;
     elements.modalCurtidas.textContent = countValue;
     
+    // Captura o texto do overlay do post e o exibe no modal
+    const overlayText = post.querySelector('.video-overlay').textContent;
+    const modalOverlay = document.createElement('p'); // Cria um novo elemento para o texto do overlay
+    modalOverlay.className = 'video-overlay'; // Adiciona a classe para estilização
+    modalOverlay.textContent = overlayText; // Define o texto do overlay
+    elements.modal.appendChild(modalOverlay); // Adiciona o texto ao modal
+
     // Atualiza o botão de compartilhar do modal
     elements.modalCompartilhar.setAttribute('data-id', postId);
     
@@ -255,6 +257,12 @@ function openModal(post) {
 function closeModal() {
   // Limpa o iframe para parar o vídeo
   elements.modalIframe.src = '';
+  
+  // Limpa o conteúdo do modal, removendo o texto do overlay
+  const modalOverlay = elements.modal.querySelector('.video-overlay');
+  if (modalOverlay) {
+    modalOverlay.remove(); // Remove o texto do overlay
+  }
   
   // Esconde o modal
   elements.modal.style.display = 'none';
