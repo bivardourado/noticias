@@ -607,7 +607,7 @@ iframe {
 /* Estilo para o overlay do vídeo */
 .modal .video-overlay {
   position: absolute;
-  bottom: 50px; /* Posiciona o texto no rodapé do vídeo */
+  bottom: 60px; /* Posiciona o texto no rodapé do vídeo */
   left: 40px; /* Alinha o texto à esquerda */
  right: 40px; /* Alinha o texto à direita */
   color: #fff; /* Texto branco */
