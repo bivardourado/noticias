@@ -279,8 +279,8 @@ body {
   transform: translate(-50%, -50%); /* Ajusta o ponto de referência para o centro */
   background-color: rgba(20, 19, 121, 0.062); /* Fundo semitransparente */
   z-index: 1000;
-  width: 98%; /* O modal ocupa 90% da largura da tela */
-  max-width: 300px; /* Limite máximo de largura */
+  width: 100%; /* O modal ocupa 90% da largura da tela */
+  max-width: 600px; /* Limite máximo de largura */
   height: auto; /* Ajusta a altura ao conteúdo */
   max-height: 90vh; /* Limite máximo de altura da tela */
   overflow: hidden; /* Remove barras de rolagem */
