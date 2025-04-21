@@ -274,7 +274,7 @@ body {
 .modal {
   display: none; /* Oculto por padrão */
   position: fixed;
-  top: 50%; /* Centraliza verticalmente */
+  top: 55%; /* Centraliza verticalmente */
   left: 50%; /* Centraliza horizontalmente */
   transform: translate(-50%, -50%); /* Ajusta o ponto de referência para o centro */
   background-color: rgba(20, 19, 121, 0.062); /* Fundo semitransparente */
