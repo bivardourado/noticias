@@ -247,7 +247,7 @@ body {
 }
 
 .footer button {
-  background-color: var(--secondary-color);
+  background-color: #2640CB;
   color: var(--primary-color);
   border: none;
   padding: 10px 15px;
