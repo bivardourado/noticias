@@ -774,10 +774,11 @@ button:focus-visible, a:focus-visible {
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
-  height: 50px;
+  height: 25px;
   cursor: pointer;
   position: relative;
   z-index: 1100;
+  margin-left: 10px; /* Adicione essa linha para afastar as barras da direita */
 }
 
 .hamburger-menu div {
