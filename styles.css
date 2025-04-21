@@ -756,8 +756,8 @@ button:focus-visible, a:focus-visible {
 
 @media (max-width: 480px) {
   .logo img {
-    height: 2rem; /* Redução maior para smartphones */
-    max-width: 120px;
+    height: 3rem; /* Redução maior para smartphones */
+    max-width: 180px;
   }
 }
 
