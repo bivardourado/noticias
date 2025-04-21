@@ -740,27 +740,27 @@ button:focus-visible, a:focus-visible {
 }
 
 .logo img {
-  width: auto; /* Permite que a largura seja ajustada proporcionalmente */
-  height: 2.5rem; /* Altura relativa ao tamanho da fonte do root */
-  max-width: 150px; /* Limite máximo de largura */
-  object-fit: contain; /* Mantém a proporção da imagem */
+  width: auto;
+  height: 3.5rem; /* Aumentado de 2.5rem para 3.5rem */
+  max-width: 200px; /* Aumentado de 150px para 200px */
+  object-fit: contain;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
   .logo img {
-    height: 2rem; /* Menor em tablets */
+    height: 3rem; /* Aumentado de 2rem para 3rem */
   }
 }
 
 @media (max-width: 480px) {
   .logo img {
-    height: 1.8rem; /* Ainda menor em smartphones */
+    height: 2.5rem; /* Aumentado de 1.8rem para 2.5rem */
   }
 }
 
 @media (min-width: 1200px) {
   .logo img {
-    height: 3rem; /* Maior em telas grandes */
+    height: 4rem; /* Aumentado de 3rem para 4rem */
   }
 }
