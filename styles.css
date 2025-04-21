@@ -741,7 +741,7 @@ button:focus-visible, a:focus-visible {
 
 .logo img {
   width: auto;
-  height: 3.5rem; /* Aumentado de 2.5rem para 3.5rem */
+  height: 5rem; /* Aumentado de 2.5rem para 3.5rem */
   max-width: 200px; /* Aumentado de 150px para 200px */
   object-fit: contain;
 }
