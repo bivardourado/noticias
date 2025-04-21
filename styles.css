@@ -736,18 +736,31 @@ button:focus-visible, a:focus-visible {
 .logo {
   display: flex;
   align-items: center;
+  padding: 0.5rem;
 }
 
 .logo img {
-  width: 120px;  /* Largura fixa */
-  height: 40px;  /* Altura fixa */
+  width: auto; /* Permite que a largura seja ajustada proporcionalmente */
+  height: 2.5rem; /* Altura relativa ao tamanho da fonte do root */
+  max-width: 150px; /* Limite máximo de largura */
   object-fit: contain; /* Mantém a proporção da imagem */
 }
 
-/* Responsividade para telas menores */
+/* Responsividade */
 @media (max-width: 768px) {
   .logo img {
-    width: 100px; /* Largura menor para dispositivos móveis */
-    height: 35px; /* Altura menor para dispositivos móveis */
+    height: 2rem; /* Menor em tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    height: 1.8rem; /* Ainda menor em smartphones */
+  }
+}
+
+@media (min-width: 1200px) {
+  .logo img {
+    height: 3rem; /* Maior em telas grandes */
   }
 }
