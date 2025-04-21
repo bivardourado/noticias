@@ -771,38 +771,27 @@ button:focus-visible, a:focus-visible {
 
 /* Estilo do botão de menu hambúrguer */
 .hamburger-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
-  position: relative;
-  z-index: 1100;
-}
-
-.hamburger-menu div {
-  background-color: var(--secondary-color);
-  height: 4px;
-  border-radius: 2px;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-/* Estilo para o menu hamburger */
-.hamburger-menu {
-  margin-right: auto; /* Move para a esquerda */
-  margin-left: 300px; /* Espaço à esquerda */
+  margin-right: auto;
+  margin-left: 300px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px; /* Reduzido de 4px para 3px para aproximar mais as linhas */
 }
 
 .hamburger-menu div {
-  width: 25px;
-  height: 3px;
+  width: 20px;
+  height: 1.5px; /* Reduzido de 2px para 1.5px para linhas mais finas */
   background-color: var(--secondary-color);
-  border-radius: 3px;
+  border-radius: 1px;
   transition: all 0.3s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hamburger-menu div {
+    width: 18px;
+    height: 1px; /* Ainda mais fino em telas móveis */
+    gap: 2px; /* Ainda mais próximas em telas móveis */
+  }
 }
