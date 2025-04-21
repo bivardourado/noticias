@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #122f8c; /* Azul principal */
+  --primary-color: #2640CB; /* Atualizando a cor principal */
   
   --secondary-color: #fff; /* Branco */
   --danger-color: #ff4d4d; /* Vermelho para ações perigosas */
@@ -33,16 +33,16 @@ body {
 
 /* Cabeçalho estilo app */
 .header {
-  position: fixed; /* Fixa o cabeçalho no topo */
-  top: 0; /* Alinha no topo */
-  left: 0; /* Alinha à esquerda */
-  width: 100%; /* Faz o cabeçalho ocupar toda a largura da tela */
-  background-color: var(--primary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2640CB; /* Cor atualizada diretamente */
   color: var(--secondary-color);
   padding: 0px;
   text-align: center;
-  z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Ajuste para o conteúdo abaixo do cabeçalho */
@@ -730,5 +730,24 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 480px) {
   .modal .emoji-menu .emoji {
     font-size: 1.2rem; /* Reduz ainda mais o tamanho dos emojis em telas muito pequenas */
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 120px;  /* Largura fixa */
+  height: 40px;  /* Altura fixa */
+  object-fit: contain; /* Mantém a proporção da imagem */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .logo img {
+    width: 100px; /* Largura menor para dispositivos móveis */
+    height: 35px; /* Altura menor para dispositivos móveis */
   }
 }
