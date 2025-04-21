@@ -39,7 +39,7 @@ body {
   width: 100%; /* Faz o cabeçalho ocupar toda a largura da tela */
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  padding: 15px;
+  padding: 0px;
   text-align: center;
   z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
