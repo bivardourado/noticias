@@ -767,3 +767,23 @@ button:focus-visible, a:focus-visible {
     max-width: 250px; /* Aumentado de 200px para 250px */
   }
 }
+
+/* Estilo do botão de menu hambúrguer */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1100;
+}
+
+.hamburger-menu div {
+  background-color: var(--secondary-color);
+  height: 4px;
+  border-radius: 2px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
