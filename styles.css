@@ -56,9 +56,10 @@ body {
   font-weight: bold;
 }
 
+/* Ajuste do navbar */
 .navbar {
   display: flex;
-  justify-content: flex-end; /* Alinha itens à direita */
+  justify-content: space-between; /* Mudado para space-between para distribuir os elementos */
   align-items: center;
   padding: 10px;
   width: 100%;
@@ -738,6 +739,7 @@ button:focus-visible, a:focus-visible {
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  margin-left: 10px; /* Adiciona margem à esquerda */
 }
 
 .logo img {
@@ -751,7 +753,11 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 768px) {
   .logo img {
     height: 3rem; /* Aumentado de 2rem para 3rem */ 
-    max-width: 200px; /* Aumentado de 150px para 200px */
+    max-width: 150px; /* Reduzido para melhor ajuste em telas menores */
+  }
+
+  .hamburger-menu {
+    margin-right: 15px; /* Reduz a margem em telas menores */
   }
 }
 
@@ -771,12 +777,12 @@ button:focus-visible, a:focus-visible {
 
 /* Estilo do botão de menu hambúrguer */
 .hamburger-menu {
-  margin-right: auto;
-  margin-left: 300px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 3px; /* Reduzido de 4px para 3px para aproximar mais as linhas */
+  gap: 3px;
+  margin-right: 20px; /* Adiciona margem à direita */
+  margin-left: 0; /* Remove a margem esquerda anterior */
 }
 
 .hamburger-menu div {
