@@ -741,29 +741,26 @@ button:focus-visible, a:focus-visible {
 
 .logo img {
   width: auto;
-  height: 4.5rem; /* Aumentado para desktop */
-  max-width: 250px;
+  height: 3.5rem; /* Aumentado de 2.5rem para 3.5rem */
+  max-width: 200px; /* Aumentado de 150px para 200px */
   object-fit: contain;
 }
 
-/* Responsividade com diferenças mais significativas */
+/* Responsividade */
 @media (max-width: 768px) {
   .logo img {
-    height: 3rem; /* Redução significativa para tablets */
-    max-width: 180px;
+    height: 3rem; /* Aumentado de 2rem para 3rem */
   }
 }
 
 @media (max-width: 480px) {
   .logo img {
-    height: 4rem; /* Redução maior para smartphones */
-    max-width: 100px;
+    height: 2.5rem; /* Aumentado de 1.8rem para 2.5rem */
   }
 }
 
 @media (min-width: 1200px) {
   .logo img {
-    height: 5rem; /* Maior ainda para telas grandes */
-    max-width: 300px;
+    height: 4rem; /* Aumentado de 3rem para 4rem */
   }
 }
