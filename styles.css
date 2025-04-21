@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #dfe1e7; /* Atualizando a cor principal */
+  --primary-color: #2640CB; /* Atualizando a cor principal */
   
   --secondary-color: #fff; /* Branco */
   --danger-color: #ff4d4d; /* Vermelho para ações perigosas */
@@ -247,7 +247,7 @@ body {
 }
 
 .footer button {
-  background-color: #2640CB;
+  background-color: var(--secondary-color);
   color: var(--primary-color);
   border: none;
   padding: 10px 15px;
