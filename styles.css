@@ -122,13 +122,21 @@ body {
 /* Exemplo de CSS responsivo */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo */
+  grid-template-columns: repeat(2, 1fr); /* Sempre 2 colunas */
   gap: 20px;
 }
 
+/* Remove ou atualiza os media queries anteriores */
 @media (max-width: 768px) {
   .posts-grid {
-    grid-template-columns:repeat(2, 1fr); /* Uma coluna em telas menores */
+    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas mesmo em telas menores */
+    gap: 10px; /* Reduz o espaçamento em telas menores */
+  }
+}
+
+@media (min-width: 1024px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas em telas grandes */
   }
 }
 
