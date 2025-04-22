@@ -318,6 +318,7 @@ body {
 
 /* Vídeo dentro do modal */
 .modal .video-container {
+  cursor: pointer;
   position: relative;
   width: 100%;
   padding-top: calc(100% / (9/16));
@@ -325,6 +326,64 @@ body {
   border-radius: 10px;
   margin-bottom: 10px;
   overflow: hidden;
+  --play-icon-display: block; /* Variável CSS para controlar visibilidade do ícone */
+}
+
+/* Adiciona efeito hover */
+.modal .video-container:hover {
+  opacity: 0.9;
+}
+
+/* Adiciona ícone de play */
+.modal .video-container::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  opacity: 0.8;
+  pointer-events: none;
+  display: var(--play-icon-display, block);
+}
+
+/* Estilo do ícone de play do YouTube */
+.modal .video-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 48'%3E%3Cpath d='M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z' fill='%23f00'/%3E%3Cpath d='M45,24L27,14v20L45,24z' fill='%23fff'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  display: var(--play-icon-display, block);
+}
+
+.modal .video-container:hover::after {
+  opacity: 1;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .modal .video-container::after {
+    width: 48px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal .video-container::after {
+    width: 34px;
+    height: 24px;
+  }
 }
 
 /* Estilo para o overlay do vídeo no modal */
@@ -351,8 +410,18 @@ body {
 }
 
 /* Remove as propriedades do iframe no modal */
-.modal .video-container iframe {
+/* .modal .video-container iframe {
   display: none;
+} */
+
+.modal .video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
 }
 
 /* Estilo para os emojis e ações */
@@ -550,7 +619,7 @@ iframe {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* Fundo semi-transparente em todo container */
+  /* Fundo semi-transparente em todo container */
   display: flex;
   align-items: flex-end; /* Alinha o conteúdo na parte inferior */
   padding-bottom: 10px; /* Espaço na parte inferior */
@@ -559,7 +628,7 @@ iframe {
 .video-overlay p {
   width: 100%;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.7);
+ 
   padding: 10px;
   margin: 0;
   font-size: 0.9rem;
@@ -632,7 +701,7 @@ iframe {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+
   display: flex;
   align-items: flex-end;
   padding-bottom: 10px;
@@ -641,7 +710,7 @@ iframe {
 .modal .video-overlay p {
   width: 100%;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.7);
+ 
   padding: 10px;
   margin: 0;
   font-size: 0.9rem;
@@ -835,7 +904,7 @@ button:focus-visible, a:focus-visible {
   left: 0;
   width: 100%;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro para melhor legibilidade */
+
   padding: 10px;
   font-size: 1rem;
   text-align: center;

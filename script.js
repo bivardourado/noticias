@@ -179,6 +179,31 @@ function initModalInteractions() {
       closeModal();
     });
   });
+
+  // Adiciona evento de clique no container de vídeo do modal
+  const modalVideoContainer = elements.modal.querySelector('.video-container');
+  if (modalVideoContainer) {
+    modalVideoContainer.addEventListener('click', () => {
+      const videoSrc = elements.modalIframe.src;
+      if (videoSrc) {
+        // Atualiza o src do iframe para forçar o play do vídeo
+        const updatedSrc = videoSrc.includes('?') ? 
+          `${videoSrc}&autoplay=1` : 
+          `${videoSrc}?autoplay=1`;
+        
+        elements.modalIframe.src = updatedSrc;
+        
+        // Esconde o overlay e o ícone de play
+        const modalOverlay = elements.modal.querySelector('.video-overlay');
+        if (modalOverlay) {
+          modalOverlay.style.display = 'none';
+        }
+        
+        // Remove o ícone de play definido no ::after
+        modalVideoContainer.style.setProperty('--play-icon-display', 'none');
+      }
+    });
+  }
 }
 
 /**
@@ -215,10 +240,17 @@ function openModal(post) {
   const postId = post.getAttribute('data-id');
   
   if (postId) {
-    // Pega o texto do overlay do post original
-    const overlayText = post.querySelector('.video-overlay').textContent;
+    // Pega o src do iframe do post original
+    const originalIframe = post.querySelector('iframe');
+    const videoSrc = originalIframe ? originalIframe.src : '';
     
-    // Atualiza o texto do overlay no modal
+    // Atualiza o src do iframe do modal
+    if (elements.modalIframe && videoSrc) {
+      elements.modalIframe.src = videoSrc;
+    }
+    
+    // Pega e atualiza o texto do overlay
+    const overlayText = post.querySelector('.video-overlay').textContent;
     const modalOverlay = elements.modal.querySelector('.video-overlay');
     if (modalOverlay) {
       modalOverlay.textContent = overlayText;
@@ -240,16 +272,12 @@ function openModal(post) {
  * Fecha o modal
  */
 function closeModal() {
-  console.log('Fechando modal...'); // Debug
+  if (!elements.modal) return;
   
-  if (!elements.modal) {
-    console.error('Modal element not found');
-    return;
-  }
-
-  // Limpa o iframe
-  if (elements.modalIframe) {
-    elements.modalIframe.src = '';
+  // Limpa o src do iframe para parar o vídeo
+  const modalIframe = elements.modalIframe;
+  if (modalIframe) {
+    modalIframe.src = '';
   }
   
   // Remove o texto do overlay

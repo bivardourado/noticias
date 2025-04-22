@@ -208,7 +208,12 @@
     <div class="modal-content post">
       <button class="close" title="Fechar">&times;</button>
       <div class="video-container">
-        <!-- Removido o iframe, mantido apenas o overlay -->
+        <iframe id="video-iframe" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
         <div class="video-overlay"></div>
       </div>
       <div class="actions">
