@@ -23,12 +23,12 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   margin: 0;
+  padding-top: 60px; /* Adiciona espaço equivalente à altura do cabeçalho */
 }
 
 .container {
   max-width: 600px;
   margin: 0 auto;
-
 }
 
 /* Cabeçalho estilo app */
@@ -44,12 +44,6 @@ body {
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-/* Ajuste para o conteúdo abaixo do cabeçalho */
-body {
-  padding-top: 60px; /* Adiciona espaço equivalente à altura do cabeçalho */
-}
-
 
 .header .logo {
   font-size: 1.5rem;
@@ -119,24 +113,30 @@ body {
   text-align: center;
 }
 
-/* Exemplo de CSS responsivo */
+/* Grid sempre com 2 colunas */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Sempre 2 colunas */
   gap: 20px;
 }
 
-/* Remove ou atualiza os media queries anteriores */
+/* Responsividade - mantendo 2 colunas, mas ajustando o espaçamento */
 @media (max-width: 768px) {
   .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas mesmo em telas menores */
+    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas */
     gap: 10px; /* Reduz o espaçamento em telas menores */
   }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 480px) {
   .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas em telas grandes */
+    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas */
+    gap: 8px; /* Reduz ainda mais o espaçamento */
+  }
+  
+  /* Ajustamos o padding dentro dos posts para telas pequenas */
+  .post {
+    padding: 10px; /* Reduz o padding para dar mais espaço ao conteúdo */
   }
 }
 
@@ -352,9 +352,6 @@ body {
   flex-wrap: wrap; /* Permite que os emojis quebrem para a próxima linha em telas muito pequenas */
 }
 
-
-
-
 .modal .curtidas {
   font-size: 1rem;
   color: var(--text-color);
@@ -507,39 +504,6 @@ iframe {
   border: none;
 }
 
-/* Responsividade */
-@media (min-width: 768px) {
-  .posts-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .posts-grid {
-    grid-template-columns: 1fr; /* Uma coluna no celular */
-  }
-
-  .video-container {
-    padding-top: 200%; /* Ajusta a proporção para telas menores */
-  }
-
-  .video-overlay {
-    font-size: 0.9rem; /* Reduz o tamanho do texto em telas menores */
-    bottom: 5px; /* Reduz o espaçamento do rodapé */
-    left: 5px; /* Ajusta o alinhamento à esquerda */
-  }
-}
-
-@media (min-width: 1024px) {
-  .post {
-    flex: 1 1 calc(33.33% - 15px);
-  }
-
-  .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Três colunas no desktop */
-  }
-}
-
 /* Container de vídeo */
 .video-container {
   position: relative;
@@ -565,7 +529,6 @@ iframe {
   left: 10px; /* Alinha o texto à esquerda */
   color: #fff; /* Texto branco */
   font-size: 1rem; /* Tamanho do texto padrão */
- 
   padding: 5px 5px; /* Espaçamento interno */
   border-radius: 20px; /* Bordas arredondadas */
   margin: 0; /* Remove margens */
@@ -619,10 +582,9 @@ iframe {
   position: absolute;
   bottom: 60px; /* Posiciona o texto no rodapé do vídeo */
   left: 40px; /* Alinha o texto à esquerda */
- right: 40px; /* Alinha o texto à direita */
+  right: 40px; /* Alinha o texto à direita */
   color: #fff; /* Texto branco */
   font-size: 0.9rem; /* Tamanho do texto padrão */
- 
   padding: 10px 10px; /* Espaçamento interno */
   border-radius: 20px; /* Bordas arredondadas */
   margin: 0; /* Remove margens */
@@ -670,7 +632,6 @@ button:focus-visible, a:focus-visible {
 /* Posiciona os emojis abaixo do vídeo */
 .modal .actions {
   display: flex;
- 
   align-items: center; /* Centraliza os elementos horizontalmente */
   gap: 10px; /* Espaçamento entre os elementos */
 }
