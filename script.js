@@ -295,7 +295,7 @@ function sharePostModal(postId) {
     const cleanUrl = currentUrl.toString().split('#')[0];
     
     // Compartilha via WhatsApp
-    const message = "Confira este vídeo incrível!";
+    const message = "Curta este vídeo incrível e concorra a prêmios!";
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + ' ' + cleanUrl)}`;
     window.open(whatsappUrl, '_blank');
   } catch (error) {
