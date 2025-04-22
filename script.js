@@ -10,7 +10,7 @@ const elements = {
   modalIframe: document.getElementById('video-iframe'),
   modalCurtidas: document.getElementById('modal-curtidas'),
   modalCompartilhar: document.getElementById('modal-compartilhar'),
-  closeButton: document.querySelector('.close'),
+  closeButton: document.querySelector('#video-modal .close'), // Atualizado seletor
   posts: document.querySelectorAll('.post')
 };
 
@@ -149,36 +149,35 @@ function initPostsInteractions() {
  * Inicializa as interações do modal
  */
 function initModalInteractions() {
-  // Adiciona evento para fechar o modal
-  elements.closeButton.addEventListener('click', closeModal);
+  console.log('Initializing modal interactions...'); // Debug
   
-  // Fecha o modal ao clicar fora do conteúdo
+  // Evento do botão fechar
+  if (elements.closeButton) {
+    console.log('Close button found'); // Debug
+    elements.closeButton.addEventListener('click', () => {
+      console.log('Close button clicked'); // Debug
+      closeModal();
+    });
+  } else {
+    console.error('Close button not found');
+  }
+  
+  // Fecha ao clicar fora
   window.addEventListener('click', event => {
     if (event.target === elements.modal) {
       closeModal();
     }
   });
   
-  // Adiciona eventos para os emojis no modal
-  const modalEmojis = elements.modal.querySelectorAll('.emoji');
+  // Eventos dos emojis
+  const modalEmojis = document.querySelectorAll('#video-modal .emoji');
   modalEmojis.forEach(emoji => {
     emoji.addEventListener('click', () => {
-      // Ao invés de incrementar contador no modal, incrementa diretamente no post
       if (appState.currentPost) {
         incrementLikeCount(appState.currentPost);
-        // Fecha o modal automaticamente após registrar o like
-        closeModal();
       }
+      closeModal();
     });
-  });
-  
-  // Adiciona evento ao botão de compartilhar do modal
-  elements.modalCompartilhar.addEventListener('click', () => {
-    const postId = appState.currentPost ? appState.currentPost.getAttribute('data-id') : null;
-    if (postId) {
-      // Compartilha o link para a página com o modal do post
-      sharePostModal(postId);
-    }
   });
 }
 
@@ -255,19 +254,28 @@ function openModal(post) {
  * Fecha o modal
  */
 function closeModal() {
-  // Limpa o iframe para parar o vídeo
-  elements.modalIframe.src = '';
+  console.log('Fechando modal...'); // Debug
   
-  // Limpa o conteúdo do modal, removendo o texto do overlay
+  if (!elements.modal) {
+    console.error('Modal element not found');
+    return;
+  }
+
+  // Limpa o iframe
+  if (elements.modalIframe) {
+    elements.modalIframe.src = '';
+  }
+  
+  // Remove overlay
   const modalOverlay = elements.modal.querySelector('.video-overlay');
   if (modalOverlay) {
-    modalOverlay.remove(); // Remove o texto do overlay
+    modalOverlay.remove();
   }
   
   // Esconde o modal
   elements.modal.style.display = 'none';
   
-  // Limpa a referência ao post atual
+  // Reset do estado
   appState.currentPost = null;
 }
 
