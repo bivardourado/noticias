@@ -319,21 +319,40 @@ body {
 /* Vídeo dentro do modal */
 .modal .video-container {
   position: relative;
-  width: 100%; /* O vídeo ocupa toda a largura do modal */
-  aspect-ratio: 9 / 16; /* Mantém a proporção 9:16 */
+  width: 100%;
+  padding-top: calc(100% / (9/16));
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  margin-bottom: 10px;
   overflow: hidden;
-  background-color: #000; /* Fundo preto */
-  border-radius: 10px; /* Bordas arredondadas */
-  margin-bottom: 10px; /* Espaçamento abaixo do vídeo */
 }
 
-.modal .video-container iframe {
+/* Estilo para o overlay do vídeo no modal */
+.modal .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* O iframe ocupa toda a largura do contêiner */
-  height: 100%; /* O iframe ocupa toda a altura do contêiner */
-  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 007);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.modal .video-overlay p {
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.007);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Remove as propriedades do iframe no modal */
+.modal .video-container iframe {
+  display: none;
 }
 
 /* Estilo para os emojis e ações */
@@ -521,19 +540,47 @@ iframe {
   width: 100%; /* O iframe ocupa toda a largura do contêiner */
   height: 100%; /* O iframe ocupa toda a altura do contêiner */
   border: none;
+  object-fit: cover; /* Garante que o vídeo cubra todo o espaço */
 }
 
-.video-overlay  {
+/* Estilo para o overlay do vídeo */
+.video-overlay {
   position: absolute;
-  bottom: 80px; /* Posiciona o texto no rodapé do vídeo */
-  left: 10px; /* Alinha o texto à esquerda */
-  color: #fff; /* Texto branco */
-  font-size: 1rem; /* Tamanho do texto padrão */
-  padding: 5px 5px; /* Espaçamento interno */
-  border-radius: 20px; /* Bordas arredondadas */
-  margin: 0; /* Remove margens */
-  display: inline-block; /* Faz o fundo se ajustar ao tamanho do texto */
-  background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente para contraste */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Fundo semi-transparente em todo container */
+  display: flex;
+  align-items: flex-end; /* Alinha o conteúdo na parte inferior */
+  padding-bottom: 10px; /* Espaço na parte inferior */
+}
+
+.video-overlay p {
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .video-overlay p,
+  .modal .video-overlay p {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-overlay p,
+  .modal .video-overlay p {
+    font-size: 0.7rem;
+    padding: 6px;
+  }
 }
 
 .video-overlay {
@@ -576,21 +623,31 @@ iframe {
   width: 100%; /* O iframe ocupa toda a largura do contêiner */
   height: 100%; /* O iframe ocupa toda a altura do contêiner */
   border: none;
+  object-fit: cover;
 }
 /* Estilo para o overlay do vídeo */
 .modal .video-overlay {
   position: absolute;
-  bottom: 60px; /* Posiciona o texto no rodapé do vídeo */
-  left: 40px; /* Alinha o texto à esquerda */
-  right: 40px; /* Alinha o texto à direita */
-  color: #fff; /* Texto branco */
-  font-size: 0.9rem; /* Tamanho do texto padrão */
-  padding: 10px 10px; /* Espaçamento interno */
-  border-radius: 20px; /* Bordas arredondadas */
-  margin: 0; /* Remove margens */
-  display: inlfine-block; /* Faz o fundo se ajustar ao tamanho do texto */
-  background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente para contraste */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
 }
+
+.modal .video-overlay p {
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .modal .ad-container {
   width: 80%; /* O contêiner ocupa toda a largura disponível */
   max-width: 400px; /* Limite máximo de largura */
@@ -768,5 +825,58 @@ button:focus-visible, a:focus-visible {
     width: 18px;
     height: 1px; /* Ainda mais fino em telas móveis */
     gap: 2px; /* Ainda mais próximas em telas móveis */
+  }
+}
+
+/* Estilo para o overlay do vídeo */
+.video-overlay {
+  position: absolute;
+  bottom: 0;      /* Move para a parte inferior */
+  left: 0;
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro para melhor legibilidade */
+  padding: 10px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Ajuste específico para o overlay no modal */
+.modal .video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.modal .video-overlay p {
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .video-overlay p,
+  .modal .video-overlay p {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-overlay p,
+  .modal .video-overlay p {
+    font-size: 0.7rem;
+    padding: 6px;
   }
 }

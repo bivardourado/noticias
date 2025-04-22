@@ -215,34 +215,20 @@ function openModal(post) {
   const postId = post.getAttribute('data-id');
   
   if (postId) {
-    // Decide qual URL de vídeo usar
-    let videoSrc;
-    if (postId === 'rIVP8pndzMo') {
-      // Usa o ID real do YouTube para o primeiro post
-      videoSrc = `https://www.youtube.com/embed/${postId}`;
-    } else if (postId.startsWith('post-')) {
-      // Para os outros posts (com IDs gerados), usa um vídeo placeholder ou padrão
-      videoSrc = 'https://www.youtube.com/embed/dQw4w9WgXcQ'; // Vídeo padrão como exemplo
-    } else {
-      // Caso o post tenha um ID de vídeo específico
-      videoSrc = `https://www.youtube.com/embed/${postId}`;
+    // Pega o texto do overlay do post original
+    const overlayText = post.querySelector('.video-overlay').textContent;
+    
+    // Atualiza o texto do overlay no modal
+    const modalOverlay = elements.modal.querySelector('.video-overlay');
+    if (modalOverlay) {
+      modalOverlay.textContent = overlayText;
     }
     
-    // Define o iframe para o vídeo correto
-    elements.modalIframe.src = videoSrc;
-    
-    // Copia a contagem de curtidas do post para o modal
+    // Atualiza contagem de curtidas
     const countValue = appState.likeData[postId] || 0;
     elements.modalCurtidas.textContent = countValue;
     
-    // Captura o texto do overlay do post e o exibe no modal
-    const overlayText = post.querySelector('.video-overlay').textContent;
-    const modalOverlay = document.createElement('p'); // Cria um novo elemento para o texto do overlay
-    modalOverlay.className = 'video-overlay'; // Adiciona a classe para estilização
-    modalOverlay.textContent = overlayText; // Define o texto do overlay
-    elements.modal.appendChild(modalOverlay); // Adiciona o texto ao modal
-
-    // Atualiza o botão de compartilhar do modal
+    // Atualiza botão de compartilhar
     elements.modalCompartilhar.setAttribute('data-id', postId);
     
     // Mostra o modal
@@ -266,10 +252,10 @@ function closeModal() {
     elements.modalIframe.src = '';
   }
   
-  // Remove overlay
+  // Remove o texto do overlay
   const modalOverlay = elements.modal.querySelector('.video-overlay');
   if (modalOverlay) {
-    modalOverlay.remove();
+    modalOverlay.textContent = '';
   }
   
   // Esconde o modal
