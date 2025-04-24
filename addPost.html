@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Novo Post</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Substitua pelo caminho do seu arquivo CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar Novo Post</h1>
+        <form id="addPostForm">
+            <div class="form-group">
+                <label for="videoId">ID do Vídeo do YouTube:</label>
+                <input type="text" id="videoId" name="videoId" placeholder="Ex: abcd1234" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição do Vídeo:</label>
+                <textarea id="description" name="description" rows="3" placeholder="Breve descrição do vídeo..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Adicionar Post</button>
+        </form>
+
+        <div id="statusMessage" class="status"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('addPostForm');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const videoId = document.getElementById('videoId').value;
+            const description = document.getElementById('description').value;
+
+            if (videoId && description) {
+                const newPostHTML = `
+                    <div class="post">
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/${videoId}" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                            <p class="video-overlay">${description}</p>
+                        </div>
+                        <div class="actions">
+                            <div class="emoji-menu">
+                                <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
+                            </div>
+                            <span class="curtidas">
+                                <span class="count">0</span> 
+                            </span>
+                            <button class="compartilhar-whatsapp" data-id="${videoId}" title="Compartilhar no WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                        </div>
+                    </div>`;
+
+                // Simular envio para backend ou adição ao DOM localmente
+                console.log('Novo Post Criado:', newPostHTML);
+                
+                statusMessage.textContent = 'Post adicionado com sucesso!';
+                statusMessage.classList.add('success');
+
+                // Limpar formulário
+                form.reset();
+            } else {
+                statusMessage.textContent = 'Por favor, preencha todos os campos!';
+                statusMessage.classList.add('error');
+            }
+
+            setTimeout(() => {
+                statusMessage.textContent = '';
+                statusMessage.className = 'status';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

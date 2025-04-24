@@ -10,6 +10,78 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+  <style>
+    /* Add these styles to your existing CSS */
+    .post {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+    
+    .post-content {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 65%;
+      padding-top: 36.5%; /* 16:9 Aspect Ratio */
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .video-text {
+      width: 35%;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      background-color: #f8f9fa;
+    }
+    
+    .video-text p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-top: 1px solid #eee;
+    }
+    
+    /* Media query for mobile devices */
+    @media (max-width: 768px) {
+      .post-content {
+        flex-direction: column;
+      }
+      
+      .video-container {
+        width: 100%;
+        padding-top: 56.25%;
+      }
+      
+      .video-text {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Cabeçalho -->
@@ -32,7 +104,6 @@
         <div class="cidade">
           <h1>Petrolina</h1>
         </div>
-      
       </nav>
     </div>
   </header>
@@ -40,25 +111,26 @@
   <!-- Postagens do Blog -->
   <section class="blog-posts">
     <div class="container">
-    
       <div class="posts-grid">
         <!-- Post 1 -->
         <div class="post" data-id="rIVP8pndzMo">
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/rIVP8pndzMo" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">Videira no quintal. Morador de Petrolina colhe uvas ...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/rIVP8pndzMo" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>Videira no quintal. Morador de Petrolina colhe uvas ...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-          
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-              
             </div>
             <span class="curtidas">
               <span class="count">0</span>
@@ -68,24 +140,26 @@
             </button>
           </div>
         </div>
+        
         <!-- Post 2 -->
         <div class="post">
-       
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/VIDEO_ID2" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">GraphQL está mudando a forma como consumimos APIs...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID2" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>GraphQL está mudando a forma como consumimos APIs...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-             
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-            
             </div>
             <span class="curtidas">
               <span class="count">0</span> 
@@ -98,22 +172,23 @@
 
         <!-- Post 3 -->
         <div class="post">
-        
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/VIDEO_ID3" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">Descubra como o TypeScript pode melhorar seu código JavaScript...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID3" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>Descubra como o TypeScript pode melhorar seu código JavaScript...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-            
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-            
             </div>
             <span class="curtidas">
               <span class="count">0</span> 
@@ -124,24 +199,26 @@
           </div>
         </div>
 
+        <!-- Continue with the same pattern for remaining posts -->
         <!-- Post 4 -->
         <div class="post">
-    
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/VIDEO_ID4" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">Aprenda a usar Python para automatizar tarefas repetitivas...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID4" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>Aprenda a usar Python para automatizar tarefas repetitivas...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-        
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-            
             </div>
             <span class="curtidas">
               <span class="count">0</span>
@@ -154,22 +231,23 @@
 
         <!-- Post 5 -->
         <div class="post">
-      
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/VIDEO_ID5" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">Como criar layouts que se adaptam a qualquer dispositivo...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID5" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>Como criar layouts que se adaptam a qualquer dispositivo...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-           
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-             
             </div>
             <span class="curtidas">
               <span class="count">0</span> 
@@ -182,22 +260,23 @@
 
         <!-- Post 6 -->
         <div class="post">
-        
-          <div class="video-container">
-            <iframe 
-              src="https://www.youtube.com/embed/VIDEO_ID6" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <p class="video-overlay">Proteja seus aplicativos contra as ameaças mais comuns...</p>
+          <div class="post-content">
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID6" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-text">
+              <p>Proteja seus aplicativos contra as ameaças mais comuns...</p>
+            </div>
           </div>
           <div class="actions">
             <div class="emoji-menu">
-             
               <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-              
             </div>
             <span class="curtidas">
               <span class="count">0</span> 
@@ -211,18 +290,22 @@
     </div>
   </section>
 
-  <!-- Modal de Vídeo -->
+  <!-- Modal de Vídeo - Also update the modal to match new layout -->
   <div id="video-modal" class="modal">
     <div class="modal-content post">
       <button class="close" title="Fechar">&times;</button>
-      <div class="video-container">
-        <iframe id="video-iframe" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-        <div class="video-overlay"></div>
+      <div class="post-content">
+        <div class="video-container">
+          <iframe id="video-iframe" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-text">
+          <p class="video-overlay"></p>
+        </div>
       </div>
       <div class="actions">
         <div class="emoji-menu">
