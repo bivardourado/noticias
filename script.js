@@ -28,22 +28,69 @@ function initApp() {
 
 /**
  * Verifica a URL por parâmetros de postagem compartilhada e abre o modal apropriado
+ * com emojis e ações visíveis imediatamente
  */
 function checkUrlForSharedPost() {
   const urlParams = new URLSearchParams(window.location.search);
   const sharedPostId = urlParams.get('post');
   
   if (sharedPostId) {
-    // Encontra o post com o ID correspondente
     const targetPost = Array.from(elements.posts).find(post => 
       post.getAttribute('data-id') === sharedPostId
     );
     
     if (targetPost) {
-      // Pequeno atraso para garantir que a página carregue completamente
+      // Aguarda o DOM estar totalmente carregado
       setTimeout(() => {
+        // Primeiro abre o modal normalmente
         openModal(targetPost);
-      }, 300);
+        
+        // Forçar a exibição do menu de emojis e seus botões
+        const emojiMenu = elements.modal.querySelector('.emoji-menu');
+        if (emojiMenu) {
+          emojiMenu.style.display = 'flex';
+          emojiMenu.style.visibility = 'visible';
+          emojiMenu.style.opacity = '1';
+          
+          // Garante que todos os botões de emoji estão visíveis
+          const emojis = emojiMenu.querySelectorAll('.emoji');
+          emojis.forEach(emoji => {
+            emoji.style.display = 'flex';
+            emoji.style.visibility = 'visible';
+            emoji.style.opacity = '1';
+          });
+        }
+
+        // Garante que as ações do modal estão visíveis
+        const actionsContainer = elements.modal.querySelector('.actions');
+        if (actionsContainer) {
+          actionsContainer.style.display = 'flex';
+          actionsContainer.style.visibility = 'visible';
+          actionsContainer.style.opacity = '1';
+        }
+        
+        // Força o autoplay do vídeo para simular um clique
+        const videoSrc = elements.modalIframe.src;
+        if (videoSrc) {
+          const updatedSrc = videoSrc.includes('?') ? 
+            `${videoSrc}&autoplay=1` : 
+            `${videoSrc}?autoplay=1`;
+          
+          elements.modalIframe.src = updatedSrc;
+          
+          // Esconde o overlay e o ícone de play
+          const modalOverlay = elements.modal.querySelector('.video-overlay');
+          if (modalOverlay) {
+            modalOverlay.style.display = 'none';
+          }
+          
+          // Remove o ícone de play definido no ::after
+          const modalVideoContainer = elements.modal.querySelector('.video-container');
+          if (modalVideoContainer) {
+            modalVideoContainer.style.setProperty('--play-icon-display', 'none');
+          }
+        }
+      }, 1000); // Aumentado o tempo de espera para garantir que tudo carregue
     }
   }
 }
@@ -201,9 +248,58 @@ function initModalInteractions() {
         
         // Remove o ícone de play definido no ::after
         modalVideoContainer.style.setProperty('--play-icon-display', 'none');
+        
+        // Exibe o menu de emojis ao clicar no vídeo
+        const emojiMenu = elements.modal.querySelector('.emoji-menu');
+        if (emojiMenu) {
+          emojiMenu.style.display = 'flex';
+          emojiMenu.style.visibility = 'visible';
+          emojiMenu.style.opacity = '1';
+          
+          // Garante que todos os botões de emoji estão visíveis
+          const emojis = emojiMenu.querySelectorAll('.emoji');
+          emojis.forEach(emoji => {
+            emoji.style.display = 'flex';
+            emoji.style.visibility = 'visible';
+            emoji.style.opacity = '1';
+          });
+        }
+        
+        // Garante que as ações do modal estão visíveis
+        const actionsContainer = elements.modal.querySelector('.actions');
+        if (actionsContainer) {
+          actionsContainer.style.display = 'flex';
+          actionsContainer.style.visibility = 'visible';
+          actionsContainer.style.opacity = '1';
+        }
       }
     });
   }
+
+  // Initialize emoji reactions
+  const emojiButtons = elements.modal.querySelectorAll('.emoji');
+  emojiButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const emoji = button.getAttribute('data-emoji');
+      const postId = appState.currentPost.getAttribute('data-id');
+      
+      // Update like count
+      const count = document.getElementById('modal-curtidas');
+      count.textContent = parseInt(count.textContent) + 1;
+      
+      // Save to localStorage
+      const likes = JSON.parse(localStorage.getItem(`likes_${postId}`) || '0');
+      localStorage.setItem(`likes_${postId}`, JSON.stringify(likes + 1));
+    });
+  });
+
+  // Initialize WhatsApp sharing
+  const shareButton = document.getElementById('modal-compartilhar');
+  shareButton.addEventListener('click', () => {
+    const postId = appState.currentPost.getAttribute('data-id');
+    const text = encodeURIComponent(`Confira este vídeo: ${window.location.origin}?video=${postId}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  });
 }
 
 /**
