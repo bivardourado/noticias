@@ -377,97 +377,68 @@ body {
   }
 }
 
-/* Modal */
-.modal {
-  display: none; /* Oculto por padrão */
-  position: fixed;
-  top: 55%; /* Centraliza verticalmente */
-  left: 50%; /* Centraliza horizontalmente */
-  transform: translate(-50%, -50%); /* Ajusta o ponto de referência para o centro */
-  background-color: rgba(20, 19, 121, 0.062); /* Fundo semitransparente */
-  z-index: 1000;
-  width: 100%; /* O modal ocupa 90% da largura da tela */
-  max-width: 600px; /* Limite máximo de largura */
-  height: auto; /* Ajusta a altura ao conteúdo */
-  max-height: 90vh; /* Limite máximo de altura da tela */
-  overflow: hidden; /* Remove barras de rolagem */
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.075); /* Sombra para destaque */
-  display: flex;
-  flex-direction: column; /* Empilha os elementos verticalmente */
-  justify-content: space-between; /* Garante espaçamento entre os elementos */
-  align-items: center;
-}
-
-/* Conteúdo do modal */
-.modal-content {
-  background-color: var(--secondary-color);
-  padding: 20px;
-  border-radius: 10px;
-  width: 100%; /* O conteúdo ocupa toda a largura do modal */
-  height: auto; /* Ajusta a altura ao conteúdo */
-  box-sizing: border-box; /* Inclui padding e borda no cálculo do tamanho */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Garante espaçamento entre os elementos */
-  align-items: center;
-}
-
-/* Vídeo dentro do modal */
-.modal .video-container {
-  cursor: pointer;
-  position: relative;
-  width: 100%;
-  padding-top: calc(100% / (9/16));
-  background-color: var(--primary-color);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  --play-icon-display: block; /* Variável CSS para controlar visibilidade do ícone */
-}
-
-/* Adiciona efeito hover */
-.modal .video-container:hover {
-  opacity: 0.9;
-}
-
-/* Adiciona ícone de play */
-.modal .video-container::after {
-  content: '▶';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3rem;
-  opacity: 0.8;
-  pointer-events: none;
-  display: var(--play-icon-display, block);
-}
-
-/* Estilo do ícone de play do YouTube */
-.modal .video-container::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 68px;
-  height: 48px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 48'%3E%3Cpath d='M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z' fill='%23f00'/%3E%3Cpath d='M45,24L27,14v20L45,24z' fill='%23fff'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  opacity: 0.9;
-  transition: opacity 0.3s;
-  pointer-events: none;
-  display: var(--play-icon-display, block);
-}
-
-.modal .video-container:hover::after {
-  opacity: 1;
-}
-
+/* Modal */.modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 1000;
+      overflow: auto;
+    }
+    
+    .modal-content {
+      position: relative;
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 0;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .modal .video-container {
+      width: 100%;
+      padding-top: 177.78%;
+      position: relative;
+    }
+    
+    .modal iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #fff;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1010;
+      background: rgba(0,0,0,0.5);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
+      border: none;
+    }
+    
+    .modal .actions {
+      display: flex;
+      padding: 10px;
+      justify-content: space-around;
+    }
 /* Ajuste para telas menores */
 @media (max-width: 768px) {
   .modal .video-container::after {
