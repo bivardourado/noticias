@@ -90,7 +90,7 @@ function checkUrlForSharedPost() {
             modalVideoContainer.style.setProperty('--play-icon-display', 'none');
           }
         }
-      }, 10); // Aumentado o tempo de espera para garantir que tudo carregue
+      }, 0.1); // Aumentado o tempo de espera para garantir que tudo carregue
     }
   }
 }
