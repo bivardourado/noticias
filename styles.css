@@ -391,15 +391,41 @@ body {
     
     .modal-content {
       position: relative;
-      background-color: #fff;
-      margin: 5% auto;
+    
+      margin: 54px auto;
       padding: 0;
       width: 90%;
       max-width: 400px;
       border-radius: 8px;
       overflow: hidden;
+      max-height: 80vh; /* Add maximum height */
+      display: flex; /* Add flex display */
+      flex-direction: column; /* Stack children vertically */
     }
     
+    /* Ajuste específico para o modal-content.post */
+.modal-content.post {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  background-color: transparent; /* Remove o fundo branco */
+  padding: 0;
+  margin: 54px auto;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Garante que o vídeo ocupe todo o espaço necessário */
+.modal-content.post .video-container {
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1 0 auto; /* Impede que o container encolha */
+}
+
+/* Oculta completamente a div .actions fora do vídeo */
+.modal-content.post > .actions {
+  display: none;
+}
     .modal .video-container {
       width: 100%;
       padding-top: 177.78%;
@@ -959,6 +985,3 @@ button:focus-visible, a:focus-visible {
     padding: 6px;
   }
 }
-
-
-
