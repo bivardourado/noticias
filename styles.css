@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #2640CB; /* Primary color */
-  --primary-hover-color: #1e33a3; /* Added for hover effects */
+  --primary-color: #26cb3c05; /* Primary color */
+  --primary-hover-color: #f4f8f4; /* Added for hover effects */
   --secondary-color: #fff; /* White */
   --danger-color: #ff4d4d; /* Red for dangerous actions */
   --danger-hover-color: #e60000; /* Darker red for hover */
