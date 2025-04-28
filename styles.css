@@ -1,16 +1,16 @@
 :root {
-  --primary-color: #2640CB; /* Atualizando a cor principal */
-  
-  --secondary-color: #fff; /* Branco */
-  --danger-color: #ff4d4d; /* Vermelho para ações perigosas */
-  --danger-hover-color: #e60000; /* Vermelho mais escuro para hover */
-  --text-color: #333; /* Cor do texto padrão */
-  --background-color: #f9f9f9; /* Cor de fundo padrão */
- 
-  --video-aspect-ratio: 9 / 16; /* Proporção padrão: vertical (9:16) */
+  --primary-color: #2640CB; /* Primary color */
+  --primary-hover-color: #1e33a3; /* Added for hover effects */
+  --secondary-color: #fff; /* White */
+  --danger-color: #ff4d4d; /* Red for dangerous actions */
+  --danger-hover-color: #e60000; /* Darker red for hover */
+  --text-color: #333; /* Default text color */
+  --background-color: #f9f9f9; /* Default background color */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Added for shadows */
+  --video-aspect-ratio: 9 / 16; /* Default: vertical (9:16) */
 }
 
-/* Reset básico */
+/* Basic reset */
 * {
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   margin: 0;
-  padding-top: 35px; /* Reduzido de 45px para 35px */
+  padding-top: 35px;
 }
 
 .container {
@@ -31,27 +31,26 @@ body {
   margin: 0 auto;
 }
 
-/* Cabeçalho estilo app */
+/* App-style header */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(180deg, #000000, #1E1E1E); /* Gradiente de preto para #1E1E1E */
+  background: linear-gradient(180deg, #000000, #1E1E1E);
   color: var(--secondary-color);
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .logo-container {
-  padding: 2px 0; /* Reduzido ainda mais */
-  text-align: left; /* Alinhado à esquerda */
+  padding: 2px 0;
+  text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 35px; /* Altura fixa para o container */
+  height: 35px;
   overflow: hidden;
 }
 
@@ -59,23 +58,21 @@ body {
   display: flex;
   align-items: center;
   padding: 0;
-  margin-left: 10px; /* Adiciona margem à esquerda */
+  margin-left: 10px;
   height: 100%;
   overflow: hidden;
 }
 
 .logo img {
-  height: 40px; /* Altura maior que o container */
+  height: 40px;
   width: auto;
-  max-width: 120px; /* Reduzido largura máxima */
- 
-  object-position: left -4px; /* Move a imagem 4px para cima */
-  /* Você pode ajustar o valor negativo (-4px) conforme necessário */
+  max-width: 120px;
+  object-position: left -4px;
 }
 
-/* Estilo do hamburger menu */
+/* Hamburger menu */
 .hamburger-menu {
-  position: relative; /* Mudado de absolute para relative */
+  position: relative;
   right: 10px;
   display: flex;
   flex-direction: column;
@@ -95,80 +92,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 0; /* Remove padding lateral */
+  padding: 2px 0;
   width: 100%;
-  background-color:  #F0EDD8;
-  position: absolute; /* Importante para expandir além do container */
-  left: 0; /* Alinha à esquerda da página */
-  right: 0; /* Alinha à direita da página */
-  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Borda superior */
-  border-bottom: 1px solid rgba(0, 0, 0, 1.3); /* Borda inferior */
-  
+  background-color: #F0EDD8;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 1.3);
 }
 
 .cidade {
   width: 100%;
-  max-width: 600px; /* Mesmo valor do .container */
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
 }
 
 .cidade h1 {
   font-family: sans-serif;
-  font-weight: 100; /* peso mais fino possível */
+  font-weight: 100;
   font-size: 1rem;
   margin: 0;
-  color: #e60000; /* Vermelho */
-  /* Outras opções de cores:
-  color: #ffd700; // Dourado
-  color: #ff9e00; // Laranja
-  color: #f72585; // Rosa
-  color: #00f5d4; // Turquesa
-  */
+  color: #e60000;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  
 }
 
-.nav-links, .auth-links {
+.nav-links,
+.auth-links {
   display: flex;
   gap: 10px;
 }
 
-@media (max-width: 768px) {
-  .nav-links, .auth-links {
-    flex-direction: column; /* Empilha os links em telas menores */
-    align-items: flex-start;
-  }
-  
-  .logo img {
-    height: 3.5rem; /* Reduzido de 3rem para 2.5rem */
-    max-width: 120px; /* Reduzido de 150px para 120px */
-  }
-  
-  .cidade h1 {
-    font-size: 0.9rem; /* Reduzido de 1rem para 0.9rem */
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-links, .auth-links {
-    flex-direction: column; /* Empilha os links em telas menores */
-    align-items: flex-start;
-  }
-  
-  .logo img {
-    height: 2rem; /* Reduzido de 2.5rem para 2rem */
-    max-width: 100px; /* Reduzido de 120px para 100px */
-  }
-  
-  .cidade h1 {
-    font-size: 1rem;
-  }
-}
-
-/* Destaque */
+/* Featured section */
 .featured {
   padding: 20px;
   text-align: center;
@@ -199,7 +157,7 @@ body {
   font-weight: bold;
 }
 
-/* Postagens do Blog */
+/* Blog posts */
 .blog-posts {
   padding: 20px;
 }
@@ -210,31 +168,10 @@ body {
   text-align: center;
 }
 
-/* Grid sempre com 2 colunas */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Sempre 2 colunas */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-}
-
-/* Responsividade - mantendo 2 colunas, mas ajustando o espaçamento */
-@media (max-width: 768px) {
-  .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas */
-    gap: 10px; /* Reduz o espaçamento em telas menores */
-  }
-}
-
-@media (max-width: 480px) {
-  .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas */
-    gap: 8px; /* Reduz ainda mais o espaçamento */
-  }
-  
-  /* Ajustamos o padding dentro dos posts para telas pequenas */
-  .post {
-    padding: 10px; /* Reduz o padding para dar mais espaço ao conteúdo */
-  }
 }
 
 .post {
@@ -246,9 +183,9 @@ body {
 }
 
 .post iframe {
-  width: 100%; /* Largura total do contêiner */
+  width: 100%;
   height: auto;
-  aspect-ratio: 9 / 16; /* Proporção vertical (9:16) */
+  aspect-ratio: 9 / 16;
   border-radius: 10px;
 }
 
@@ -270,7 +207,8 @@ body {
   gap: 10px;
 }
 
-.curtir, .compartilhar {
+.curtir,
+.compartilhar {
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border: none;
@@ -281,13 +219,15 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.curtir:hover, .compartilhar:hover {
-  background-color: var(--primary-hover-color); /* Cor mais escura no hover */
-  transform: scale(1.05); /* Leve aumento no tamanho */
+.curtir:hover,
+.compartilhar:hover {
+  background-color: var(--primary-hover-color);
+  transform: scale(1.05);
 }
 
-.curtir:focus, .compartilhar:focus {
-  outline: 2px solid var(--primary-hover-color); /* Destaque no foco */
+.curtir:focus,
+.compartilhar:focus {
+  outline: 2px solid var(--primary-hover-color);
 }
 
 .compartilhar {
@@ -295,32 +235,31 @@ body {
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
-  margin-left: 10px; /* Espaçamento entre o botão e o número de curtidas */
-  color: var(--primary-color); /* Cor do botão */
+  margin-left: 10px;
+  color: var(--primary-color);
   transition: transform 0.2s ease;
 }
 
 .compartilhar:hover {
   transform: scale(1.2);
-  color: #128c7e; /* Cor mais escura ao passar o mouse */
+  color: #128c7e;
 }
 
-/* Estilo para o botão do WhatsApp nos posts */
 .compartilhar-whatsapp {
   background: none;
   border: none;
-  font-size: 1.5rem; /* Tamanho do ícone */
+  font-size: 1.5rem;
   cursor: pointer;
-  color: #25d366; /* Cor verde do WhatsApp */
-  transition: transform 0.2s ease, color 0.2s ease; /* Transição suave */
+  color: #25d366;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .compartilhar-whatsapp:hover {
-  transform: scale(1.2); /* Aumenta o tamanho no hover */
-  color: #128c7e; /* Cor mais escura ao passar o mouse */
+  transform: scale(1.2);
+  color: #128c7e;
 }
 
-/* Botão de carregar mais */
+/* Load more button */
 .load-more {
   display: block;
   width: 100%;
@@ -335,7 +274,7 @@ body {
   margin-top: 20px;
 }
 
-/* Rodapé */
+/* Footer */
 .footer {
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -371,571 +310,52 @@ body {
   gap: 20px;
 }
 
-@media (max-width: 768px) {
-  .footer-links {
-    flex-direction: column; /* Empilha os links no rodapé */
-  }
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow: auto;
 }
 
-/* Modal */.modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      z-index: 1000;
-      overflow: auto;
-    }
-    
-    .modal-content {
-      position: relative;
-    
-      margin: 54px auto;
-      padding: 0;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
-      overflow: hidden;
-      max-height: 80vh; /* Add maximum height */
-      display: flex; /* Add flex display */
-      flex-direction: column; /* Stack children vertically */
-    }
-    
-    /* Ajuste específico para o modal-content.post */
-.modal-content.post {
-  display: flex;
-  flex-direction: column;
-  max-height: 80vh;
-  background-color: transparent; /* Remove o fundo branco */
-  padding: 0;
+.modal-content {
+  position: relative;
   margin: 54px auto;
+  padding: 0;
   width: 90%;
   max-width: 400px;
-}
-    
-    .modal .video-container {
-      width: 100%;
-      padding-top: 177.78%;
-      position: relative;
-    }
-    
-    .modal iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      color: #fff;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1010;
-      background: rgba(0,0,0,0.5);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 0;
-      border: none;
-    }
-    
-    .modal .actions {
-      display: flex;
-      padding: 10px;
-      justify-content: space-around;
-    }
-/* Ajuste para telas menores */
-@media (max-width: 768px) {
-  .modal .video-container::after {
-    width: 48px;
-    height: 34px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal .video-container::after {
-    width: 34px;
-    height: 24px;
-  }
-}
-
-/* Estilo para o overlay do vídeo no modal */
-.modal .video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 007);
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-
-.modal .video-overlay p {
-  width: 100%;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.007);
-  padding: 10px;
-  margin: 0;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-/* Remove as propriedades do iframe no modal */
-/* .modal .video-container iframe {
-  display: none;
-} */
-
-.modal .video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  object-fit: cover;
-}
-
-/* Estilo para os emojis e ações */
-.modal .actions {
-  margin-top: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.modal .emoji-menu {
-  display: flex; /* Usa Flexbox para alinhar os emojis em linha */
-  gap: 10px; /* Espaçamento entre os emojis */
-  justify-content: center;
-  flex-wrap: wrap; /* Permite que os emojis quebrem para a próxima linha em telas muito pequenas */
-}
-
-.modal .curtidas {
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-.modal .compartilhar-whatsapp {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #25d366; /* Cor verde do WhatsApp */
-  transition: transform 0.2s ease;
-}
-
-.modal .compartilhar-whatsapp:hover {
-  transform: scale(1.2);
-  color: #128c7e; /* Cor mais escura ao passar o mouse */
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-  .modal {
-    width: 95%; /* O modal ocupa 95% da largura em telas menores */
-    max-height: 85vh; /* Limite máximo de altura */
-  }
-
-  .modal .video-container {
-    aspect-ratio: 9 / 16; /* Mantém a proporção 9:16 */
-  }
-
-  .modal .emoji-menu .emoji {
-    font-size: 1.2rem; /* Reduz o tamanho dos emojis em telas menores */
-  }
-}
-
-@media (max-width: 480px) {
-  .modal {
-    width: 100%; /* O modal ocupa toda a largura em telas muito pequenas */
-    max-height: 90vh; /* Limite máximo de altura */
-    padding: 10px; /* Reduz o padding interno */
-  }
-
-  .modal .video-container {
-    aspect-ratio: 9 / 16; /* Mantém a proporção 9:16 */
-  }
-
-  .modal .emoji-menu .emoji {
-    font-size: 1rem; /* Reduz ainda mais o tamanho dos emojis em telas muito pequenas */
-  }
-}
-
-@media (max-width: 768px) {
-  .modal {
-    width: 95%; /* O modal ocupa 95% da largura em telas menores */
-    max-height: 85vh; /* Limite máximo de altura */
-  }
-
-  .modal .video-container { 
-    height: 35%; /* O vídeo ocupa 35% da altura do modal em telas menores */
-  }
-
-  .modal .emoji-menu .emoji {
-    font-size: 1.2rem; /* Reduz o tamanho dos emojis em telas menores */
-  }
-}
-
-@media (max-width: 480px) {
-  .modal {
-    width: 100%; /* O modal ocupa toda a largura em telas muito pequenas */
-    max-height: 90vh; /* Limite máximo de altura */
-    padding: 10px; /* Reduz o padding interno */
-  }
-
-  .modal .video-container {
-    height: 30%; /* O vídeo ocupa 30% da altura do modal em telas muito pequenas */
-  }
-
-  .modal .emoji-menu .emoji {
-    font-size: 1rem; /* Reduz ainda mais o tamanho dos emojis em telas muito pequenas */
-  }
-}
-
-.modal .close {
-  position: absolute; /* Posiciona o botão dentro do modal */
-  top: 10px; /* Distância do topo */
-  right: 10px; /* Distância da borda direita */
-  font-size: 1.5rem; /* Tamanho do texto */
-  color: hsl(0, 91%, 50%); /* Cor do botão */
-  cursor: pointer; /* Mostra o cursor de clique */
-  z-index: 1001; /* Garante que o botão fique acima do conteúdo */
-}
-
-/* Estilo para o botão "Fechar" dentro do modal */
-button.fechar {
-  background-color: var(--danger-color); /* Cor de fundo vermelha */
-  color: var(--secondary-color); /* Cor do texto branca */
-  border: none; /* Remove a borda padrão */
-  padding: 10px 20px; /* Espaçamento interno */
-  border-radius: 5px; /* Bordas arredondadas */
-  font-size: 1rem; /* Tamanho da fonte */
-  cursor: pointer; /* Mostra o cursor de clique */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
-}
-
-/* Efeito de hover no botão "Fechar" */
-button.fechar:hover {
-  background-color: var(--danger-hover-color); /* Cor mais escura no hover */
-  transform: scale(1.05); /* Leve aumento no tamanho */
-}
-
-/* Efeito de foco no botão "Fechar" */
-button.fechar:focus {
-  outline: 2px solid var(--danger-hover-color); /* Destaque no foco */
-  outline-offset: 2px; /* Espaçamento do destaque */
-}
-
-/* Estilo para o corpo do modal */
-.modal-body {
-  display: flex;
-  flex-direction: column; /* Empilha os elementos na vertical */
-  gap: 20px; /* Espaçamento entre o vídeo e a publicidade */
-  justify-content: center;
-  align-items: center;
-  width: 100%; /* O corpo do modal ocupa toda a largura */
-}
-
-/* Estilo para o contêiner de publicidade */
-.ad-container {
-  width: 100%;
-  max-width: 400px; /* Mesmo tamanho máximo do vídeo */
-  text-align: center;
-}
-
-.ad-container img {
-  width: 100%;
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(247, 244, 244, 0.1); /* Sombra para destaque */
-}
-
-.ad-container p {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* Estilo para tornar o iframe responsivo */
-iframe {
-  width: 100%;
-  height: 600px; /* Altura ajustada para vídeos verticais */
-  border: none;
-}
-
-/* Container de vídeo */
-.video-container {
-  position: relative;
-  width: 100%; /* O vídeo ocupa toda a largura do contêiner */
-  padding-top: calc(100% / (var(--video-aspect-ratio))); /* Mantém a proporção definida */
+  border-radius: 8px;
   overflow: hidden;
-  background-color: #000; /* Fundo preto */
-  border-radius: 10px; /* Bordas arredondadas */
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* O iframe ocupa toda a largura do contêiner */
-  height: 100%; /* O iframe ocupa toda a altura do contêiner */
-  border: none;
-  object-fit: cover; /* Garante que o vídeo cubra todo o espaço */
-}
-
-/* Estilo para o overlay do vídeo */
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Fundo semi-transparente em todo container */
+  max-height: 80vh;
   display: flex;
-  align-items: flex-end; /* Alinha o conteúdo na parte inferior */
-  padding-bottom: 10px; /* Espaço na parte inferior */
+  flex-direction: column; /* Stack video and ad vertically */
+  background-color: transparent;
 }
 
-.video-overlay p {
-  width: 100%;
-  color: #fff;
- 
-  padding: 10px;
-  margin: 0;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-  .video-overlay p,
-  .modal .video-overlay p {
-    font-size: 0.8rem;
-    padding: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .video-overlay p,
-  .modal .video-overlay p {
-    font-size: 0.7rem;
-    padding: 6px;
-  }
-}
-
-.video-overlay {
-  color: #fff !important; /* Força o texto a ser branco */
-}
-
-/* Ajustes para telas menores */
-@media (max-width: 768px) {
-  .video-overlay {
-    font-size: 0.9rem; /* Reduz o tamanho do texto em telas menores */
-    bottom: 5px; /* Reduz o espaçamento do rodapé */
-    left: 5px; /* Ajusta o alinhamento à esquerda */
-  }
-}
-
-/* Ajustes para telas muito pequenas (ex.: smartphones) */
-@media (max-width: 480px) {
-  .video-overlay {
-    font-size: 0.8rem; /* Reduz ainda mais o tamanho do texto */
-    bottom: 3px; /* Reduz o espaçamento do rodapé */
-    left: 3px; /* Ajusta o alinhamento à esquerda */
-  }
-}
-
-/* Estilo para o vídeo dentro do modal */
 .modal .video-container {
   position: relative;
-  width: 100%; /* O vídeo ocupa toda a largura do modal */
-  padding-top: calc(100% / (9 / 16)); /* Mantém a proporção 9:16 */
+  width: 100%;
+  padding-top: calc(100% / (var(--video-aspect-ratio))); /* Maintains 9:16 aspect ratio */
   overflow: hidden;
-  background-color: #000; /* Fundo preto */
-  border-radius: 10px; /* Bordas arredondadas */
-  margin-bottom: 0.1px; /* Espaçamento abaixo do vídeo */
+  background-color: #000;
+  border-radius: 10px;
 }
 
 .modal .video-container iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* O iframe ocupa toda a largura do contêiner */
-  height: 100%; /* O iframe ocupa toda a altura do contêiner */
+  width: 100%;
+  height: 100%;
   border: none;
   object-fit: cover;
 }
-/* Estilo para o overlay do vídeo */
-.modal .video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-
-.modal .video-overlay p {
-  width: 100%;
-  color: #fff;
- 
-  padding: 10px;
-  margin: 0;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.modal .ad-container {
-  width: 80%; /* O contêiner ocupa toda a largura disponível */
-  max-width: 400px; /* Limite máximo de largura */
-  text-align: center;
-}
-
-.modal .ad-container img {
-  width: 100%; /* A imagem ocupa toda a largura do contêiner */
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px var(--shadow-color); /* Sombra para destaque */
-}
-
-button:focus, a:focus {
-  outline: 3px solid var(--primary-color); /* Destaque visível no foco */
-  outline-offset: 2px; /* Espaçamento entre o foco e o elemento */
-}
-
-button:focus-visible, a:focus-visible {
-  outline: 3px solid var(--primary-hover-color); /* Destaque mais escuro no foco visível */
-}
-
-.emoji-menu .emoji {
-  font-size: 1rem; /* Tamanho dos emojis */
-  background: none; /* Remove o fundo padrão do botão */
-  border: none; /* Remove a borda padrão do botão */
-  cursor: pointer; /* Mostra o cursor de clique */
-  padding: 0; /* Remove qualquer espaçamento interno */
-  transition: transform 0.2s ease; /* Animação ao passar o mouse */
-}
-
-.emoji-menu .emoji:hover {
-  transform: scale(1.2); /* Aumenta o tamanho no hover */
-}
-
-.emoji-menu .emoji:focus {
-  outline: none; /* Remove o destaque de foco padrão */
-}
-
-/* Posiciona os emojis abaixo do vídeo */
-.modal .actions {
-  display: flex;
-  align-items: center; /* Centraliza os elementos horizontalmente */
-  gap: 10px; /* Espaçamento entre os elementos */
-}
-
-.modal .emoji-menu {
-  display: flex;
-  gap: 10px; /* Espaçamento entre os emojis */
-  justify-content: center;
-}
-
-.modal .emoji-menu .emoji {
-  font-size: 0.5rem; /* Tamanho dos emojis */
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.modal .emoji-menu .emoji:hover {
-  transform: scale(0.7); /* Aumenta o tamanho no hover */
-}
-
-.modal .curtidas {
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-.modal .compartilhar-whatsapp {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #25d366; /* Cor verde do WhatsApp */
-  transition: transform 0.2s ease;
-}
-
-.modal .compartilhar-whatsapp:hover {
-  transform: scale(1.2);
-  color: #128c7e; /* Cor mais escura ao passar o mouse */
-}
-
-.modal .emoji-menu {
-  display: flex; /* Usa Flexbox para alinhar os emojis em linha */
-  gap: 10px; /* Espaçamento entre os emojis */
-  justify-content: center; /* Centraliza os emojis horizontalmente */
-  flex-wrap: wrap; /* Permite que os emojis quebrem para a próxima linha em telas muito pequenas */
-}
-
-.modal .emoji-menu .emoji {
-  font-size: 1rem; /* Tamanho padrão dos emojis */
-  background: none; /* Remove o fundo padrão */
-  border: none; /* Remove a borda padrão */
-  cursor: pointer; /* Mostra o cursor de clique */
-  transition: transform 0.2s ease; /* Animação ao passar o mouse */
-}
-
-.modal .emoji-menu .emoji:hover {
-  transform: scale(1.2); /* Aumenta o tamanho no hover */
-}
-
-@media (max-width: 768px) {
-  .modal .emoji-menu .emoji {
-    font-size: 1.5rem; /* Reduz o tamanho dos emojis em telas menores */
-  }
-}
-
-@media (max-width: 480px) {
-  .modal .emoji-menu .emoji {
-    font-size: 1.2rem; /* Reduz ainda mais o tamanho dos emojis em telas muito pequenas */
-  }
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .hamburger-menu div {
-    width: 18px;
-    height: 1px; /* Ainda mais fino em telas móveis */
-    gap: 2px; /* Ainda mais próximas em telas móveis */
-  }
-}
-
-/* Estilo para o overlay do vídeo */
-.video-overlay {
-  position: absolute;
-  bottom: 0;      /* Move para a parte inferior */
-  left: 0;
-  width: 100%;
-  color: #fff;
-
-  padding: 10px;
-  font-size: 1rem;
-  text-align: center;
-}
-
-/* Ajuste específico para o overlay no modal */
 .modal .video-overlay {
   position: absolute;
   top: 0;
@@ -946,6 +366,7 @@ button:focus-visible, a:focus-visible {
   display: flex;
   align-items: flex-end;
   padding-bottom: 10px;
+  z-index: 1; /* Below actions */
 }
 
 .modal .video-overlay p {
@@ -958,18 +379,310 @@ button:focus-visible, a:focus-visible {
   text-align: center;
 }
 
-/* Ajustes responsivos */
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--danger-color);
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1010;
+  background: rgba(0, 0, 0, 0.5);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  border: none;
+}
+
+/* Emoji menu inside video, aligned left */
+.modal .actions {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  display: flex;
+  flex-direction: column; /* Stack emojis vertically */
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  z-index: 2; /* Above video and overlay */
+}
+
+.modal .emoji-menu {
+  display: flex;
+  flex-direction: column; /* Stack emojis vertically */
+  gap: 10px; /* Space between emojis */
+  align-items: flex-start;
+}
+
+.modal .emoji-menu .emoji {
+  font-size: 1.2rem; /* Consistent emoji size */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.modal .emoji-menu .emoji:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal .curtidas {
+  font-size: 1rem;
+  color: #fff; /* White for visibility over video */
+  text-align: left;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.modal .compartilhar-whatsapp {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #25d366; /* WhatsApp green */
+  transition: transform 0.2s ease;
+}
+
+.modal .compartilhar-whatsapp:hover {
+  transform: scale(1.2);
+  color: #128c7e; /* Darker green on hover */
+}
+
+/* Ad container */
+.modal .ad-container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.modal .ad-container img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.modal .ad-container p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Video container (non-modal) */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: calc(100% / (var(--video-aspect-ratio)));
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 10px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.video-overlay p {
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Accessibility */
+button:focus,
+a:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--primary-hover-color);
+}
+
+/* Close button */
+button.fechar {
+  background-color: var(--danger-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.fechar:hover {
+  background-color: var(--danger-hover-color);
+  transform: scale(1.05);
+}
+
+button.fechar:focus {
+  outline: 2px solid var(--danger-hover-color);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .video-overlay p,
+  .nav-links,
+  .auth-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo img {
+    height: 3.5rem;
+    max-width: 120px;
+  }
+
+  .cidade h1 {
+    font-size: 0.9rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .modal .actions {
+    top: auto;
+    bottom: 10px; /* Move to bottom for mobile */
+    left: 10px;
+    flex-direction: row; /* Emojis in a row */
+    justify-content: flex-start;
+    width: auto;
+    background: rgba(0, 0, 0, 0.5); /* Background for visibility */
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  .modal .emoji-menu {
+    flex-direction: row; /* Emojis side by side */
+    align-items: center;
+  }
+
+  .modal .emoji-menu .emoji {
+    font-size: 1rem;
+    padding: 3px;
+  }
+
+  .modal .curtidas {
+    font-size: 0.9rem;
+    padding: 3px 8px;
+  }
+
+  .modal .compartilhar-whatsapp {
+    font-size: 1.3rem;
+  }
+
   .modal .video-overlay p {
     font-size: 0.8rem;
     padding: 8px;
   }
+
+  .video-overlay p {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .hamburger-menu div {
+    width: 18px;
+    height: 1px;
+    gap: 2px;
+  }
 }
 
 @media (max-width: 480px) {
-  .video-overlay p,
+  .nav-links,
+  .auth-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo img {
+    height: 2rem;
+    max-width: 100px;
+  }
+
+  .cidade h1 {
+    font-size: 1rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .post {
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-height: 90vh;
+    padding: 10px;
+  }
+
+  .modal .emoji-menu .emoji {
+    font-size: 0.9rem;
+    padding: 2px;
+  }
+
+  .modal .curtidas {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+  }
+
+  .modal .compartilhar-whatsapp {
+    font-size: 1.2rem;
+  }
+
   .modal .video-overlay p {
+    font-size: 0.7rem;
+    padding: 6px;
+  }
+
+  .video-overlay p {
     font-size: 0.7rem;
     padding: 6px;
   }
