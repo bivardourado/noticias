@@ -18,7 +18,7 @@ const elements = {
  * Inicializa a aplicação
  */
 function initApp() {
-  // Garante que todos os posts tenham um identificador único
+  loadPosts(); // Adiciona carregamento dos posts
   ensurePostIdentifiers();
   initPostsInteractions();
   initModalInteractions();
@@ -227,7 +227,7 @@ function initModalInteractions() {
     });
   });
 
-  // Adiciona evento de clique no container de vídeo do modal
+  // Atualiza o evento de clique no container de vídeo do modal
   const modalVideoContainer = elements.modal.querySelector('.video-container');
   if (modalVideoContainer) {
     modalVideoContainer.addEventListener('click', () => {
@@ -240,56 +240,42 @@ function initModalInteractions() {
         
         elements.modalIframe.src = updatedSrc;
         
-        // Esconde o overlay e o ícone de play
+        // Esconde o overlay
         const modalOverlay = elements.modal.querySelector('.video-overlay');
         if (modalOverlay) {
           modalOverlay.style.display = 'none';
         }
         
-        // Remove o ícone de play definido no ::after
-        modalVideoContainer.style.setProperty('--play-icon-display', 'none');
+        // Mostra ações e sincroniza contadores
+        showModalActions();
         
-        // Exibe o menu de emojis ao clicar no vídeo
-        const emojiMenu = elements.modal.querySelector('.emoji-menu');
-        if (emojiMenu) {
-          emojiMenu.style.display = 'flex';
-          emojiMenu.style.visibility = 'visible';
-          emojiMenu.style.opacity = '1';
-          
-          // Garante que todos os botões de emoji estão visíveis
-          const emojis = emojiMenu.querySelectorAll('.emoji');
-          emojis.forEach(emoji => {
-            emoji.style.display = 'flex';
-            emoji.style.visibility = 'visible';
-            emoji.style.opacity = '1';
-          });
-        }
-        
-        // Garante que as ações do modal estão visíveis
-        const actionsContainer = elements.modal.querySelector('.actions');
-        if (actionsContainer) {
-          actionsContainer.style.display = 'flex';
-          actionsContainer.style.visibility = 'visible';
-          actionsContainer.style.opacity = '1';
+        // Sincroniza o contador de curtidas
+        if (appState.currentPost) {
+          const postId = appState.currentPost.getAttribute('data-id');
+          const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+          const currentCount = likeData[postId] || 0;
+          updateCountElements(postId, currentCount);
         }
       }
     });
   }
 
-  // Initialize emoji reactions
+  // Atualiza o handler de clique dos emojis
   const emojiButtons = elements.modal.querySelectorAll('.emoji');
   emojiButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const emoji = button.getAttribute('data-emoji');
-      const postId = appState.currentPost.getAttribute('data-id');
-      
-      // Update like count
-      const count = document.getElementById('modal-curtidas');
-      count.textContent = parseInt(count.textContent) + 1;
-      
-      // Save to localStorage
-      const likes = JSON.parse(localStorage.getItem(`likes_${postId}`) || '0');
-      localStorage.setItem(`likes_${postId}`, JSON.stringify(likes + 1));
+      if (appState.currentPost) {
+        const postId = appState.currentPost.getAttribute('data-id');
+        incrementLikeCount(appState.currentPost);
+        
+        // Atualiza os contadores em todos os lugares
+        const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+        const newCount = likeData[postId] || 0;
+        updateCountElements(postId, newCount);
+        
+        // Não fecha o modal após curtir
+        // closeModal(); // Remove esta linha
+      }
     });
   });
 
@@ -310,18 +296,22 @@ function incrementLikeCount(post) {
   if (!post) return;
   
   const postId = post.getAttribute('data-id');
-  const countElement = post.querySelector('.count');
   
-  if (postId && countElement) {
-    const currentCount = parseInt(countElement.textContent) || 0;
+  if (postId) {
+    // Carrega dados existentes
+    const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+    const currentCount = likeData[postId] || 0;
     const newCount = currentCount + 1;
     
-    // Atualiza o elemento visual
-    countElement.textContent = newCount;
+    // Atualiza contadores em todos os lugares
+    updateCountElements(postId, newCount);
     
-    // Armazena o novo valor
+    // Salva no localStorage
+    likeData[postId] = newCount;
+    localStorage.setItem('blogLikeData', JSON.stringify(likeData));
+    
+    // Atualiza appState
     appState.likeData[postId] = newCount;
-    saveLikeData();
   }
 }
 
@@ -334,15 +324,23 @@ function openModal(post) {
   
   appState.currentPost = post;
   const postId = post.getAttribute('data-id');
+  const isShort = post.getAttribute('data-type') === 'short';
   
   if (postId) {
-    // Pega o src do iframe do post original
-    const originalIframe = post.querySelector('iframe');
-    const videoSrc = originalIframe ? originalIframe.src : '';
+    // Add appropriate class to modal for proper aspect ratio
+    const modalContainer = elements.modal.querySelector('.video-container');
+    if (modalContainer) {
+      modalContainer.className = `video-container ${isShort ? 'shorts' : 'regular'}`;
+    }
     
-    // Atualiza o src do iframe do modal
-    if (elements.modalIframe && videoSrc) {
-      elements.modalIframe.src = videoSrc;
+    // Different player parameters for Shorts
+    const embedUrl = isShort 
+      ? `https://www.youtube.com/embed/${postId}?enablejsapi=1&rel=0&loop=1&playlist=${postId}`
+      : `https://www.youtube.com/embed/${postId}?enablejsapi=1`;
+    
+    // Update iframe src
+    if (elements.modalIframe) {
+      elements.modalIframe.src = embedUrl;
     }
     
     // Pega e atualiza o texto do overlay
@@ -352,9 +350,12 @@ function openModal(post) {
       modalOverlay.textContent = overlayText;
     }
     
-    // Atualiza contagem de curtidas
-    const countValue = appState.likeData[postId] || 0;
-    elements.modalCurtidas.textContent = countValue;
+    // Update like count from localStorage
+    const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+    const currentCount = likeData[postId] || 0;
+    
+    // Update modal count
+    elements.modalCurtidas.textContent = currentCount;
     
     // Atualiza botão de compartilhar
     elements.modalCompartilhar.setAttribute('data-id', postId);
@@ -414,5 +415,105 @@ function sharePostModal(postId) {
   }
 }
 
+/**
+ * Carrega os posts do localStorage e os exibe na página
+ * Com suporte para vídeos regulares e Shorts do YouTube
+ */
+function loadPosts() {
+  const postsGrid = document.querySelector('.posts-grid');
+  const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+  const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+  
+  console.log('Loading posts:', posts); // Debug
+
+  postsGrid.innerHTML = posts.map(post => {
+    // Add debug log
+    console.log('Processing post:', post);
+    
+    // Determine video container class based on video type
+    const containerClass = post.isShort ? 'video-container shorts' : 'video-container regular';
+    
+    // Add different player parameters for Shorts
+    const embedUrl = post.isShort 
+      ? `https://www.youtube.com/embed/${post.id}?enablejsapi=1&rel=0&loop=1&playlist=${post.id}`
+      : `https://www.youtube.com/embed/${post.id}?enablejsapi=1`;
+
+    return `
+      <div class="post" data-id="${post.id}" data-type="${post.isShort ? 'short' : 'regular'}">
+          <div class="${containerClass}">
+              <iframe 
+                  src="${embedUrl}"
+                  title="${post.title}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+              </iframe>
+              <div class="video-overlay">${post.title}</div>
+          </div>
+          <div class="actions">
+              <div class="emoji-menu">
+                  <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
+              </div>
+              <span class="curtidas">
+                  <span class="count">${likeData[post.id] || 0}</span>
+              </span>
+              <button class="compartilhar-whatsapp" data-id="${post.id}">
+                  <i class="fab fa-whatsapp"></i>
+              </button>
+          </div>
+      </div>
+    `;
+  }).join('');
+
+  // Atualiza os elementos do DOM após carregar os posts
+  elements.posts = document.querySelectorAll('.post');
+  
+  // Initialize interactions for new posts
+  initPostsInteractions();
+}
+
+function showModalActions() {
+  const emojiMenu = elements.modal.querySelector('.emoji-menu');
+  const actionsContainer = elements.modal.querySelector('.actions');
+  
+  if (emojiMenu) {
+    emojiMenu.style.display = 'flex';
+    emojiMenu.style.visibility = 'visible';
+    emojiMenu.style.opacity = '1';
+    
+    const emojis = emojiMenu.querySelectorAll('.emoji');
+    emojis.forEach(emoji => {
+      emoji.style.display = 'flex';
+      emoji.style.visibility = 'visible';
+      emoji.style.opacity = '1';
+    });
+  }
+  
+  if (actionsContainer) {
+    actionsContainer.style.display = 'flex';
+    actionsContainer.style.visibility = 'visible';
+    actionsContainer.style.opacity = '1';
+  }
+}
+
+function updateCountElements(postId, count) {
+  // Update post in main page
+  const postCountElement = document.querySelector(`.post[data-id="${postId}"] .count`);
+  if (postCountElement) {
+    postCountElement.textContent = count;
+  }
+  
+  // Update modal count
+  const modalCountElement = document.getElementById('modal-curtidas');
+  if (modalCountElement) {
+    modalCountElement.textContent = count;
+  }
+  
+  // Força salvamento no localStorage
+  const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+  likeData[postId] = count;
+  localStorage.setItem('blogLikeData', JSON.stringify(likeData));
+}
+
 // Inicializa o aplicativo quando o DOM estiver completamente carregado
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', initApp);y

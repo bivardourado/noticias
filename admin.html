@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Adicionar Posts</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo">
+                </div>
+            </div>
+            <nav class="navbar">
+                <div class="cidade">
+                    <h1>Administração</h1>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <div class="container">
+            <h2>Adicionar Novo Post</h2>
+            <form id="postForm" class="admin-form">
+                <div class="form-group">
+                    <label for="videoId">URL do Vídeo do YouTube:</label>
+                    <input type="text" id="videoId" required placeholder="https://www.youtube.com/watch?v=... ou https://youtube.com/shorts/...">
+                    <small>Cole a URL completa do vídeo do YouTube ou Shorts</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Título do Post:</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Adicionar Post</button>
+            </form>
+
+            <div class="preview-section">
+                <h3>Posts Existentes</h3>
+                <div id="postsPreview" class="posts-list"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('postForm');
+            const postsPreview = document.getElementById('postsPreview');
+
+            // Função para extrair ID do vídeo do YouTube (com suporte para Shorts)
+            function extractYouTubeId(url) {
+                // Remover espaços em branco
+                url = url.trim();
+                
+                // Se for apenas um ID de 11 caracteres
+                if (url.length === 11) {
+                    return url;
+                }
+                
+                // Padrão específico para shorts com parâmetros adicionais
+                const shortsPattern = /youtube\.com\/shorts\/([^?&]{11})/i;
+                const shortsMatch = url.match(shortsPattern);
+                if (shortsMatch && shortsMatch[1]) {
+                    return shortsMatch[1];
+                }
+                
+                // Padrões diversos para URLs do YouTube
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]{11}).*/;
+                const match = url.match(regExp);
+                return (match && match[2]) ? match[2] : null;
+            }
+
+            // Carregar posts existentes
+            function loadPosts() {
+                const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+                postsPreview.innerHTML = posts.map(post => `
+                    <div class="post-item">
+                        <span>${post.title}</span>
+                        <div>
+                            <button onclick="deletePost('${post.id}')" class="delete-btn">
+                                Deletar
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Adicionar novo post
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const videoUrl = document.getElementById('videoId').value;
+                const title = document.getElementById('title').value;
+                
+                // Extrai o ID do vídeo da URL
+                const videoId = extractYouTubeId(videoUrl);
+                
+                if (!videoId) {
+                    alert('URL do YouTube inválida!');
+                    return;
+                }
+                
+                const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+                
+                posts.push({
+                    id: videoId,
+                    title: title,
+                    views: 0
+                });
+                
+                localStorage.setItem('blogPosts', JSON.stringify(posts));
+                
+                form.reset();
+                loadPosts();
+                alert('Post adicionado com sucesso!');
+            });
+
+            // Deletar post
+            window.deletePost = function(postId) {
+                if (confirm('Tem certeza que deseja deletar este post?')) {
+                    let posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+                    posts = posts.filter(post => post.id !== postId);
+                    localStorage.setItem('blogPosts', JSON.stringify(posts));
+                    loadPosts();
+                }
+            }
+
+            loadPosts();
+        });
+    </script>
+</body>
+</html>
