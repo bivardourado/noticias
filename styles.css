@@ -414,18 +414,7 @@ body {
   width: 90%;
   max-width: 400px;
 }
-
-/* Garante que o vídeo ocupe todo o espaço necessário */
-.modal-content.post .video-container {
-  border-radius: 8px;
-  overflow: hidden;
-  flex: 1 0 auto; /* Impede que o container encolha */
-}
-
-/* Oculta completamente a div .actions fora do vídeo */
-.modal-content.post > .actions {
-  display: none;
-}
+    
     .modal .video-container {
       width: 100%;
       padding-top: 177.78%;
