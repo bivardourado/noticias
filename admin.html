@@ -75,9 +75,13 @@
                 return (match && match[2]) ? match[2] : null;
             }
 
-            // Carregar posts existentes
+            // Atualizar a função loadPosts para ordenar
             function loadPosts() {
                 const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+                
+                // Ordena posts pelo timestamp (mais recentes primeiro)
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                
                 postsPreview.innerHTML = posts.map(post => `
                     <div class="post-item">
                         <span>${post.title}</span>
@@ -90,14 +94,13 @@
                 `).join('');
             }
 
-            // Adicionar novo post
+            // Atualizar a parte do submit do form
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 const videoUrl = document.getElementById('videoId').value;
                 const title = document.getElementById('title').value;
                 
-                // Extrai o ID do vídeo da URL
                 const videoId = extractYouTubeId(videoUrl);
                 
                 if (!videoId) {
@@ -110,7 +113,8 @@
                 posts.push({
                     id: videoId,
                     title: title,
-                    views: 0
+                    views: 0,
+                    createdAt: Date.now() // Adiciona timestamp
                 });
                 
                 localStorage.setItem('blogPosts', JSON.stringify(posts));

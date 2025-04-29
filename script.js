@@ -1,7 +1,9 @@
 // Armazena o estado da aplicação
 const appState = {
   currentPost: null,  // Post atualmente aberto no modal
-  likeData: {}        // Armazena dados de curtidas por post (usando índice ou ID)
+  likeData: {},        // Armazena dados de curtidas por post (usando índice ou ID)
+  currentPage: 1,
+  postsPerPage: 10
 };
 
 // Cache de elementos DOM frequentemente usados
@@ -14,16 +16,36 @@ const elements = {
   posts: document.querySelectorAll('.post')
 };
 
+// Add this function at the start of your script
+function getVideoIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('video');
+}
+
 /**
  * Inicializa a aplicação
  */
 function initApp() {
   loadPosts(); // Adiciona carregamento dos posts
+  
+  // Check for shared post parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const sharedPostId = urlParams.get('post'); // Changed from 'video' to 'post'
+  
+  if (sharedPostId) {
+    // Wait for posts to load
+    setTimeout(() => {
+      const sharedPost = document.querySelector(`.post[data-id="${sharedPostId}"]`);
+      if (sharedPost) {
+        openModal(sharedPost);
+      }
+    }, 1000); // Increased delay to ensure posts are loaded
+  }
+
   ensurePostIdentifiers();
   initPostsInteractions();
   initModalInteractions();
   initStorageData();
-  checkUrlForSharedPost();
 }
 
 /**
@@ -273,8 +295,8 @@ function initModalInteractions() {
         const newCount = likeData[postId] || 0;
         updateCountElements(postId, newCount);
         
-        // Não fecha o modal após curtir
-        // closeModal(); // Remove esta linha
+        // Fecha o modal e atualiza a página
+        closeModal();
       }
     });
   });
@@ -362,6 +384,11 @@ function openModal(post) {
     
     // Mostra o modal
     elements.modal.style.display = 'flex';
+
+    // Update URL without reloading the page
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set('post', postId);
+    window.history.pushState({}, '', newUrl);
   }
 }
 
@@ -388,6 +415,9 @@ function closeModal() {
   
   // Reset do estado
   appState.currentPost = null;
+
+  // Redireciona para index.html e força atualização
+  window.location.href = 'index.html';
 }
 
 /**
@@ -423,22 +453,26 @@ function loadPosts() {
   const postsGrid = document.querySelector('.posts-grid');
   const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
   const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
-  
-  console.log('Loading posts:', posts); // Debug
 
-  postsGrid.innerHTML = posts.map(post => {
-    // Add debug log
-    console.log('Processing post:', post);
-    
-    // Determine video container class based on video type
+  // Sort posts by timestamp (newest first)
+  posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+  // Calculate pagination
+  const startIndex = 0;
+  const endIndex = appState.currentPage * appState.postsPerPage;
+  const hasMorePosts = posts.length > endIndex;
+  const visiblePosts = posts.slice(startIndex, endIndex);
+
+  // Create HTML for posts in groups of 10
+  let postsHTML = '';
+  for (let i = 0; i < visiblePosts.length; i++) {
+    const post = visiblePosts[i];
     const containerClass = post.isShort ? 'video-container shorts' : 'video-container regular';
-    
-    // Add different player parameters for Shorts
     const embedUrl = post.isShort 
       ? `https://www.youtube.com/embed/${post.id}?enablejsapi=1&rel=0&loop=1&playlist=${post.id}`
       : `https://www.youtube.com/embed/${post.id}?enablejsapi=1`;
 
-    return `
+    postsHTML += `
       <div class="post" data-id="${post.id}" data-type="${post.isShort ? 'short' : 'regular'}">
           <div class="${containerClass}">
               <iframe 
@@ -457,19 +491,68 @@ function loadPosts() {
               <span class="curtidas">
                   <span class="count">${likeData[post.id] || 0}</span>
               </span>
-              <button class="compartilhar-whatsapp" data-id="${post.id}">
+              <button class="compartilhar-whatsapp" onclick="shareOnWhatsApp('${post.id}')" data-id="${post.id}">
                   <i class="fab fa-whatsapp"></i>
               </button>
           </div>
       </div>
     `;
-  }).join('');
 
-  // Atualiza os elementos do DOM após carregar os posts
+    // Add pagination controls after every 10 videos - removed back to top button
+    if ((i + 1) % 10 === 0 && hasMorePosts) {
+      postsHTML += `
+        <div class="pagination-controls">
+          <div class="buttons-container">
+            ${hasMorePosts ? `
+              <button class="load-more-btn">VEJA + 10  VÍDEOS</button>
+            ` : ''}
+            <!-- Commented out back to top button
+            ${appState.currentPage > 1 ? `
+              <button class="back-to-top-btn">Voltar ao topo</button>
+            ` : ''}
+            -->
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  postsGrid.innerHTML = postsHTML;
+
+  // Add event listeners to load more button only
+  document.querySelectorAll('.load-more-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      appState.currentPage++;
+      loadPosts();
+    });
+  });
+
+  /* Commented out back to top functionality
+  document.querySelectorAll('.back-to-top-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      appState.currentPage = 1;
+      loadPosts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+  */
+
+  // Update DOM elements and initialize interactions
   elements.posts = document.querySelectorAll('.post');
-  
-  // Initialize interactions for new posts
   initPostsInteractions();
+
+  // After loading posts, check for shared post
+  const urlParams = new URLSearchParams(window.location.search);
+  const sharedPostId = urlParams.get('post');
+  
+  if (sharedPostId) {
+    const targetPost = document.querySelector(`.post[data-id="${sharedPostId}"]`);
+    if (targetPost) {
+      setTimeout(() => {
+        openModal(targetPost);
+      }, 500);
+    }
+  }
 }
 
 function showModalActions() {
@@ -515,5 +598,49 @@ function updateCountElements(postId, count) {
   localStorage.setItem('blogLikeData', JSON.stringify(likeData));
 }
 
+// Modify your document ready function
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+    initApp();
+
+    // Check for video parameter in URL
+    const sharedVideoId = getVideoIdFromUrl();
+    if (sharedVideoId) {
+        // Find the post with matching video ID
+        const sharedPost = document.querySelector(`.post[data-id="${sharedVideoId}"]`);
+        if (sharedPost) {
+            // Open modal for shared video
+            setTimeout(() => {
+                openModal(sharedPost);
+            }, 500); // Small delay to ensure content is loaded
+        }
+    }
+
+    // ...existing code...
+});
+
+// Update your share function to include video ID in URL
+function shareOnWhatsApp(postId) {
+    const currentUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${currentUrl}?post=${postId}`; // Changed from 'video' to 'post'
+    const message = encodeURIComponent(`Confira este vídeo: ${shareUrl}`);
+    window.open(`https://wa.me/?text=${message}`, '_blank');
+}
+
+// Add popstate event listener to handle browser back/forward
+window.addEventListener('popstate', function(event) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const postId = urlParams.get('post');
+  
+  if (postId) {
+    const post = document.querySelector(`.post[data-id="${postId}"]`);
+    if (post) {
+      openModal(post);
+    }
+  } else {
+    closeModal();
+  }
+});
+
 // Inicializa o aplicativo quando o DOM estiver completamente carregado
-document.addEventListener('DOMContentLoaded', initApp);y
+document.addEventListener('DOMContentLoaded', initApp);

@@ -174,6 +174,10 @@ body {
   gap: 20px;
 }
 
+.posts-grid > .pagination-controls {
+  grid-column: 1 / -1;
+}
+
 .post {
   background: var(--secondary-color);
   border-radius: 10px;
@@ -685,5 +689,83 @@ button.fechar:focus {
   .video-overlay p {
     font-size: 0.7rem;
     padding: 6px;
+  }
+}
+
+/* Pagination controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+  margin: 30px 0;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Full width container */
+  padding: 20px 0;
+}
+
+/* Load more button - Primary action */
+.load-more-btn {
+  padding: 15px 50px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%; /* Define largura para 80% */
+}
+
+.load-more-btn:hover {
+  background-color: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Back to top button - Secondary action */
+.back-to-top-btn {
+  padding: 12px 24px;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-to-top-btn::before {
+  content: "↑";
+  font-size: 18px;
+}
+
+.back-to-top-btn:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .buttons-container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .load-more-btn,
+  .back-to-top-btn {
+    white-space: nowrap;
+    flex: 1;
   }
 }
