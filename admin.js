@@ -46,11 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Carregar posts existentes
     function loadPosts() {
+        const postsPreview = document.getElementById('posts-preview');
         const posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+        const likeData = JSON.parse(localStorage.getItem('blogLikeData') || '{}');
+        
         postsPreview.innerHTML = posts.map(post => `
             <div class="post-item">
-                <span>${post.title}</span>
-                <div>
+                <div class="post-info">
+                    <span class="post-title">${post.title}</span>
+                    <span class="post-likes">❤️ ${likeData[post.id] || 0} curtidas</span>
+                </div>
+                <div class="post-actions">
                     <button onclick="deletePost('${post.id}')" class="delete-btn">
                         Deletar
                     </button>

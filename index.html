@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog com YouTube Players</title>
+  <title>Vidpix</title>
+  <meta property="og:title" content="Confira este vídeo incrível e concorra a prêmios!">
+  <meta property="og:description" content="Assista agora e concorra a prêmios!">
+  <meta property="og:image" content="https://yt3.googleusercontent.com/y1qj4mYn9N7G4h36v6QcM-p7_Z1v02X-c1cZ6K_X_2Z2Y0Y3cZ6Z4v5B9h7bZ9vY2v4w=s900-c-k-c0x00ffffff-no-rj">
+  <meta property="og:url" content="https://5500-idx-vidpis-1746047114398.cluster-4xpux6pqdzhrktbhjf2cumyqtg.cloudworkstations.dev/index.html">
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <script src="main.js" defer></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <!-- Cabeçalho -->
@@ -26,53 +31,130 @@
           <div></div>
         </div>
       </div>
-      
+
       <!-- Navbar com cidade e menu -->
       <nav class="navbar">
         <div class="cidade">
           <h1>Petrolina</h1>
         </div>
-      
       </nav>
     </div>
   </header>
 
+  <div class="container">
+    <!-- Carrossel de Categorias (inicialmente escondido) -->
+    <div class="category-carousel">
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/placeholder-brasil.jpg" alt="Brasil">
+          </div>
+          <div class="category-name">Brasil</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/ChatGPT Image 2 de mai. de 2025, 15_27_41.png" alt="Mundo">
+          </div>
+          <div class="category-name">Mundo</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/ChatGPT Image 2 de mai. de 2025, 15_37_44.png" alt="Esportes">
+          </div>
+          <div class="category-name">Esportes</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/placeholder-humor.jpg" alt="Humor">
+          </div>
+          <div class="category-name">Humor</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/placeholder-natureza.jpg" alt="Natureza">
+          </div>
+          <div class="category-name">Natureza</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/placeholder-tempo.jpg" alt="Tempo">
+          </div>
+          <div class="category-name">Tempo</div>
+        </div>
+      </a>
+      <a href="#" class="category-item-link">
+        <div class="category-item">
+          <div class="category-thumbnail">
+            <img src="images/placeholder-culinaria.png" alt="Culinária">
+          </div>
+          <div class="category-name">Culinária</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+
+
   <section class="blog-posts">
     <div class="container">
         <div class="posts-grid">
-            <!-- Posts serão inseridos aqui dinamicamente -->
+            <div class="post" data-id="${postId}">
+                <div class="video-container">
+                    <iframe>...</iframe>
+                    <div class="video-overlay"></div>
+                    <!-- Adicionar botão de fechar -->
+                    <button class="close-fullscreen" title="Fechar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
   <!-- Modal de Vídeo -->
   <div id="video-modal" class="modal">
-    <div class="modal-content post">
-      <button class="close" title="Fechar">&times;</button>
+    <div class="modal-content post" data-id="">
+      <button class="close" title="Fechar">[ ] fechar </button>
       <div class="video-container">
-        <iframe id="video-iframe" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        <iframe id="video-iframe"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
-        <div class="video-overlay"></div>
-      </div>
-      <div class="actions">
-        <div class="emoji-menu">
-          <button class="emoji" data-emoji="👍" title="Curtir">👍</button>
-          <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
-          <button class="emoji" data-emoji="😂" title="Haha">😂</button>
-          <button class="emoji" data-emoji="😮" title="Uau">😮</button>
-          <button class="emoji" data-emoji="😢" title="Triste">😢</button>
+        <div class="video-overlay">
+          <div class="actions">
+            <div class="emoji-menu">
+              <button class="emoji" data-emoji="👍" title="Curtir">👍</button>
+              <button class="emoji" data-emoji="❤️" title="Amei">❤️</button>
+              <button class="emoji" data-emoji="😂" title="Haha">😂</button>
+              <button class="emoji" data-emoji="😮" title="Uau">😮</button>
+              <button class="emoji" data-emoji="😢" title="Triste">😢</button>
+            </div>
+            <span class="curtidas">
+              <span id="modal-curtidas" class="count">0</span>
+            </span>
+            <button class="compartilhar-whatsapp" id="modal-compartilhar" title="Compartilhar no WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </button>
+          </div>
+
+
         </div>
-        <span class="curtidas">
-          <span id="modal-curtidas" class="count">0</span> 
-        </span>
-        <button class="compartilhar-whatsapp" id="modal-compartilhar" title="Compartilhar no WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </button>
       </div>
+
     </div>
   </div>
 

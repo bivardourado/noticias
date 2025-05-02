@@ -126,6 +126,7 @@ body {
   gap: 10px;
 }
 
+
 /* Featured section */
 .featured {
   padding: 20px;
@@ -383,24 +384,40 @@ body {
   text-align: center;
 }
 
+/* BOTÃO DE FECHAR - ALTERADO */
 .modal .close {
   position: absolute;
   top: 10px;
-  right: 10px;
-  color: var(--danger-color);
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
+  right: 15px;
+  font-size: 1rem; /* Tamanho menor e adequado ao modal */
+  font-weight: normal;
+  color: white !important; /* Texto branco */
+  cursor: pointer; /* Cursor "mãozinha" ao passar o mouse */
+  border: none; /* Sem borda */
+  background: none; /* Sem fundo */
+  line-height: 1;
+  padding: 0;
+  margin: 0;
   z-index: 1010;
-  background: rgba(0, 0, 0, 0.5);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 0;
-  border: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: inline;
+  justify-content: normal;
+  align-items: normal;
+}
+
+.modal .close::after {
+   color: white !important;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+  color: white !important; /* Continuar branco ao passar o mouse */
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  transform: none;
 }
 
 /* Emoji menu inside video, aligned left */
@@ -521,6 +538,30 @@ body {
   margin: 0;
   font-size: 0.9rem;
   text-align: center;
+}
+
+.open-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-container:hover .open-modal-btn {
+  opacity: 1;
+}
+
+.open-modal-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
 }
 
 /* Accessibility */
@@ -727,7 +768,7 @@ button.fechar:focus {
 .load-more-btn:hover {
   background-color: #cc0000;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
 }
 
 /* Back to top button - Secondary action */
@@ -768,4 +809,70 @@ button.fechar:focus {
     white-space: nowrap;
     flex: 1;
   }
+}
+
+
+/* Category Carousel */
+.category-carousel {
+  display: flex;
+  overflow-x: auto; /* Horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping */
+  margin-top: 30px;
+  gap: 30px;
+  background-color: #f0f0f0; /* Dark background for overlay */
+  scroll-snap-type: x mandatory; /* Enable snap scrolling */
+  padding: 20px;
+  overflow-x: visible;
+}
+
+.category-carousel a {
+  text-decoration: none; /* Remove underline from links */
+  cursor: pointer;
+  margin-right: 0px;
+}
+
+.category-item {
+  position: relative;
+  width: 50px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 8px; /* borda aredondada */
+  align-items: center; /* alinhamento vertical do flex */
+  flex-direction: column;
+  display: flex;
+  gap: 2px;
+}
+
+.category-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 177.77%; /* 9:16 aspect ratio */
+  overflow: hidden;
+  border-radius: 15px;
+  background-color: #ccc; /* Placeholder background color */
+  margin-bottom: 0;
+}
+
+.category-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.category-name {
+  margin-top: 0;
+  display: block; /* Make sure it's visible */
+  position: relative; /* Remove absolute positioning */
+  margin-bottom: 0;
+  color: rgb(246, 5, 5);
+  text-align: center;
+  padding: 5px 0;
+}
+  .category-carousel a:hover {
+    transform: scale(1.3);
+    z-index: 1001;
 }
